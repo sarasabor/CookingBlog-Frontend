@@ -1,14 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import Layout from "./Layouts/Layout";
+import Home from "./pages/Home";
+import Recipes from "./pages/Recipes";
+import RecipeDetails from "./pages/RecipeDetails";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="text-center mt-10 text-3xl text-green-600">
-      <h1>مرحبا بك فـ cookingBlog 👩‍🍳</h1>
-    </div>
-  );
-}
+    <BrowserRouter>
+        <Routes>
 
-export default App
+            <Route path="/" element= {<Layout/>}/>
+            <Route index element={<Home/>}/>
+            <Route path="/recipes" element={<Recipes/>}/>
+            <Route path="/recipes/:id" element={<RecipeDetails/>}/>
+
+
+        </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
