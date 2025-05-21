@@ -1,74 +1,84 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Login() {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
 
-  try {
-    await login(inputs); // login من context
-    console.log("✅ Login success");
-    navigate("/recipes"); // خاص يكون هنا
-  } catch (err) {
-    setError(err.response?.data?.message || "Login failed.");
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
+    try {
+      await login(form);
+      navigate("/recipes");
+    } catch (err) {
+      setError(err.response?.data?.message || t("errors.login"));
+    }
+  };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div className="min-h-screen bg-[#f8f6ef] flex flex-col items-center justify-center px-4">
+      <div className="absolute top-4 right-4 space-x-2">
+        <button onClick={() => i18n.changeLanguage("en")} className="text-sm hover:underline">EN</button>
+        <button onClick={() => i18n.changeLanguage("fr")} className="text-sm hover:underline">FR</button>
+        <button onClick={() => i18n.changeLanguage("ar")} className="text-sm hover:underline">AR</button>
+      </div>
+
+      <h1 className="text-2xl font-bold mb-6 text-[#2d4032]">CookingBlog</h1>
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
+        className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-green-600">
-          🔐 Sign In
+        <h2 className="text-xl font-semibold text-center text-gray-800 mb-6">
+          {t("login.title")}
         </h2>
 
         <input
           type="email"
           name="email"
-          placeholder="Email"
-          value={inputs.email}
+          placeholder={t("login.email")}
+          value={form.email}
           onChange={handleChange}
-          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full mb-4 p-3 border rounded-lg bg-[#fdfcf8]"
           required
         />
 
         <input
           type="password"
           name="password"
-          placeholder="Password"
-          value={inputs.password}
+          placeholder={t("login.password")}
+          value={form.password}
           onChange={handleChange}
-          className="w-full mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full mb-4 p-3 border rounded-lg bg-[#fdfcf8]"
           required
         />
 
-        {error && (
-          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
 
         <button
           type="submit"
-          className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
+          className="w-full bg-[#567158] text-white py-2 rounded-lg hover:bg-[#3f5744] transition"
         >
-          Login
+          {t("login.submit")}
         </button>
+
+        <p className="text-sm text-center mt-4">
+          {t("login.noAccount")}{" "}
+          <Link to="/register" className="text-[#567158] hover:underline">
+            {t("login.registerLink")}
+          </Link>
+        </p>
       </form>
     </div>
   );

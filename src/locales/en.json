@@ -1,0 +1,118 @@
+{
+"nav": {
+"home": "Home",
+"recipes": "Recipes",
+"addRecipe": "Add Recipe",
+"moodSuggestions": "By Mood",
+"smartSuggestions": "Smart Search",
+"register": "Register",
+"login": "Login",
+"logout": "Logout"
+},
+"register": {
+"title": "Create Your Account",
+"username": "Username",
+"email": "Email",
+"password": "Password",
+"confirm": "Confirm Password",
+"submit": "Register",
+"already": "Already have an account?",
+"loginLink": "Login here"
+},
+"login": {
+"title": "Welcome back!",
+"email": "Email",
+"password": "Password",
+"submit": "Login",
+"noAccount": "Don't have an account?",
+"registerLink": "Register here"
+},
+"recipes": {
+"title": "All Recipes",
+"search": "Search for a recipe...",
+"loading": "Loading...",
+"noResults": "No recipes found.",
+"page": "Page"
+},
+"errors": {
+"passwordMatch": "Passwords do not match",
+"passwordLength": "Password must be at least 6 characters",
+"registration": "Registration failed",
+"login": "Login failed"
+},
+"home": {
+"welcome": "Welcome to CookingBlog",
+"description": "Find delicious recipes, share your own, and get suggestions based on your mood or ingredients!",
+"browse": "Browse Recipes"
+},
+"addRecipe": {
+"title": "Add New Recipe",
+"submit": "Add Recipe",
+"errors": {
+"submit": "Failed to submit recipe"
+},
+"fields": {
+"title": "Title",
+"description": "Description",
+"ingredients": "Ingredients (comma separated)",
+"instructions": "Instructions",
+"cookTime": "Cook time in minutes",
+"difficulty": "Difficulty",
+"easy": "Easy",
+"medium": "Medium",
+"hard": "Hard",
+"selectMood": "Select mood",
+"hungry": "😋 Hungry",
+"light": "🧘 Light & Healthy",
+"sweet": "🍬 Sweet",
+"quick": "⏱️ Quick & Easy",
+"fancy": "🍽️ Fancy"
+}
+},
+"moodSuggestions": {
+"title": "Suggestions by Mood",
+"selectMood": "Choose your mood",
+"search": "Find Recipes",
+"error": "Failed to load recipes.",
+"noResults": "No recipes found for this mood."
+},
+"loading": "Loading...",
+"recipe": {
+"notFound": "Recipe not found.",
+"by": "By",
+"unknown": "Unknown",
+"rating": "Rating",
+"ingredients": "Ingredients",
+"instructions": "Instructions",
+"cookTime": "Cook time",
+"difficulty": "Difficulty",
+"mood": "Mood",
+"reviews": "User Reviews",
+"noReviews": "No reviews yet.",
+"user": "User",
+"says": "says",
+"minutes": "min"
+},
+"smartSuggestions": {
+"title": "Smart Recipe Suggestions",
+"selectMood": "Select your mood",
+"chooseMood": "Choose a mood",
+"moods": {
+"hungry": "Hungry",
+"light": "Light & Healthy",
+"sweet": "Sweet",
+"quick": "Quick & Easy",
+"fancy": "Fancy"
+},
+"selectIngredients": "Select available ingredients",
+"people": "Number of people",
+"suggest": "Suggest Recipes",
+"loading": "Loading suggestions...",
+"noResults": "No matching recipes found.",
+"placeholder": {
+"ingredients": "Enter available ingredients (comma separated)",
+"mood": "Select mood (optional)",
+"servings": "Number of servings"
+}
+}
+}

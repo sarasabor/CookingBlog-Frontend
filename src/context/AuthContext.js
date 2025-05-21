@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export const AuthContext = createContext({
   user: null,
@@ -9,3 +9,6 @@ export const AuthContext = createContext({
   register: async () => {},
   logout: () => {},
 });
+
+// ✅ Custom hook for easier usage
+export const useAuth = () => useContext(AuthContext);

@@ -1,8 +1,8 @@
-import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import React,{ useEffect, useState } from "react";
 import { getAllRecipes } from "../services/api";
 import RecipeCard from "../components/RecipeCard";
-import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -10,87 +10,72 @@ function Recipes() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  // Debounce search input
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 500);
-
-    return () => clearTimeout(handler);
-  }, [search]);
-
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await getAllRecipes({ page, search: debouncedSearch });
-      setRecipes(data.recipes);
-      setTotalPages(data.totalPages);
-    } catch (err) {
-      console.error("Error fetching recipes:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, debouncedSearch]);
+  const { t } = useTranslation();
 
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await getAllRecipes({ page, search });
+        setRecipes(data.recipes);
+        setTotalPages(data.totalPages);
+      } catch (err) {
+        console.error("Error fetching recipes:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchData();
-  }, [fetchData]);
+  }, [page, search]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">🍲 Recipes</h1>
+      <h1 className="text-3xl font-bold text-[#2d4032] mb-6 text-center">
+        🍲 {t("Recipes")}
+      </h1>
 
-      {/* Search input */}
+      {/* 🔍 Search input */}
       <div className="flex justify-center mb-8">
         <input
           type="text"
-          placeholder="Search for a recipe..."
+          placeholder={t("Search")}
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setPage(1);
+            setPage(1); // reset to first page when search changes
           }}
-          className="w-full sm:w-2/3 md:w-1/2 px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          className="w-full sm:w-2/3 md:w-1/2 px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#567158] transition"
         />
       </div>
 
-      {/* Recipes list */}
+      {/* 🌀 Recipes list */}
       {loading ? (
-        <div className="flex justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-green-500"></div>
-        </div>
+        <p className="text-center text-gray-500">{t("Loading")}</p>
       ) : recipes.length === 0 ? (
-        <p className="text-center text-gray-500">No recipes found.</p>
+        <p className="text-center text-gray-500">{t("No Results Found")}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {recipes.map((recipe, index) => (
-            <motion.div
-              key={recipe._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-            >
-              <RecipeCard recipe={recipe} />
-            </motion.div>
+          {recipes.map((recipe) => (
+            <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
         </div>
       )}
 
-      {/*  Pagination */}
+      {/* 📄 Pagination */}
       <div className="mt-10 flex flex-wrap justify-center gap-2">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
-            key={`page-${i}`}
+            key={i}
             onClick={() => setPage(i + 1)}
-            className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm transition-all duration-200 ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition duration-150 ${
               i + 1 === page
-                ? "bg-green-600 text-white scale-105"
-                : "bg-white border border-gray-300 text-gray-700 hover:bg-green-100"
+                ? "bg-[#567158] text-white shadow"
+                : "bg-gray-200 text-gray-800 hover:bg-[#dfeadf]"
             }`}
           >
-            {i + 1}
+            {t("recipes.page")} {i + 1}
           </button>
         ))}
       </div>

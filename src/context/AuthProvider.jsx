@@ -36,15 +36,29 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async ({ email, password }) => {
-    await axios.post("http://localhost:5000/api/auth/login", { email, password }, { withCredentials: true });
+    await axios.post(
+      "http://localhost:5000/api/auth/login",
+      { email, password },
+      { withCredentials: true }
+    );
     await loadUser();
   };
 
   const register = async (data) => {
-    await axios.post("http://localhost:5000/api/auth/register", data, { withCredentials: true });
+    await axios.post("http://localhost:5000/api/auth/register", data, {
+      withCredentials: true,
+    });
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await axios.get("http://localhost:5000/api/auth/logout", {
+        withCredentials: true,
+      });
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+
     setUser(null);
     setToken(null);
     setIsAuthenticated(false);
@@ -58,7 +72,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, isAuthenticated, isLoading, login, register, logout }}
+      value={{
+        user,
+        token,
+        isAuthenticated,
+        isLoading,
+        login,
+        register,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
