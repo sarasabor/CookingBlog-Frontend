@@ -1,0 +1,32 @@
+{
+  "title": "وصفاتك المفضلة",
+  "searchPlaceholder": "ابحث حسب العنوان...",
+  "allMoods": "جميع الحالات النفسية",
+  "allTimes": "جميع أوقات الطهي",
+  "shortTime": "أقل من 30 دقيقة",
+  "mediumTime": "من 30 إلى 60 دقيقة",
+  "longTime": "أكثر من ساعة",
+  "noResults": "لا توجد وصفات مطابقة للفلاتر.",
+  "loading": "جاري تحميل المفضلة...",
+  "remove": "إزالة من المفضلة",
+  "moods": [
+    { "key": "all", "label": "جميع الحالات النفسية" },
+    { "key": "hungry", "label": "جائع" },
+    { "key": "sad", "label": "حزين" },
+    { "key": "stressed", "label": "متوتر" },
+    { "key": "tired", "label": "مرهق" },
+    { "key": "relaxed", "label": "مرتاح" },
+    { "key": "happy", "label": "سعيد" },
+    { "key": "bored", "label": "ضجران" },
+    { "key": "romantic", "label": "رومانسي" },
+    { "key": "anxious", "label": "قلق" },
+    { "key": "energetic", "label": "متحمس" }
+  ],
+  "timeFilters": [
+  { "key": "all", "label": "كل الأوقات" },
+  { "key": "short", "label": "قصير (≤ 15 دقيقة)" },
+  { "key": "medium", "label": "متوسط (15–45 دقيقة)" },
+  { "key": "long", "label": "طويل (> 45 دقيقة)" }
+]
+
+}

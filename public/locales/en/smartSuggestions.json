@@ -1,0 +1,90 @@
+{
+  "moodTitle": "Smart Recipe Suggestions",
+  "selectMood": "Select your current mood",
+  "chooseMood": "Choose a mood",
+  "hungry": "Hungry",
+  "sad": "Sad",
+  "stressed": "Stressed",
+  "tired": "Tired",
+  "relaxed": "Relaxed",
+  "happy": "Happy",
+  "bored": "Bored",
+  "romantic": "Romantic",
+  "anxious": "Anxious",
+  "energetic": "Energetic",
+  "selectIngredients": "Select available ingredients",
+  "people": "Number of people",
+  "maxCookTime": "Maximum cooking time (in minutes)",
+  "minRating": "Minimum rating",
+  "suggest": "Suggest Recipes",
+  "loading": "Loading suggestions...",
+  "noResults": "No recipes found matching your criteria.",
+  "ingredientsByCategory": {
+    "spices": [
+      "Salt", "Cumin", "Black Pepper", "Paprika", "Cinnamon", "Nutmeg", "Turmeric",
+      "Oregano", "Thyme", "Bay Leaves", "Coriander", "Cardamom", "Chili Flakes",
+      "Garam Masala", "Curry Powder", "Saffron", "Fennel Seeds", "Mustard Seeds",
+      "Star Anise", "Sumac"
+    ],
+    "grains": [
+      "Pasta", "Couscous", "Quinoa", "Oats", "Barley", "Lentils", "Chickpeas",
+      "Kidney Beans", "Black Beans", "White Beans"
+    ],
+    "vegetables": [
+      "Onion", "Tomato", "Garlic", "Carrot", "Potato", "Sweet Potato", "Spinach",
+      "Zucchini", "Eggplant", "Broccoli", "Cauliflower", "Bell Pepper", "Cabbage",
+      "Lettuce", "Celery", "Cucumber", "Leek", "Mushroom", "Pumpkin", "Radish",
+      "Asparagus", "Beetroot", "Brussels Sprout"
+    ],
+    "fruits": [
+      "Apple", "Banana", "Orange", "Lemon", "Lime", "Mango", "Avocado", "Pineapple", "Peach",
+      "Cherry", "Strawberry", "Blueberry", "Raspberry", "Grapes", "Watermelon",
+      "Cantaloupe", "Pear", "Apricot", "Plum", "Kiwi", "Papaya"
+    ],
+    "dairy": [
+      "Milk", "Yogurt", "Cheese", "Cream", "Sour Cream", "Evaporated Milk",
+      "Condensed Milk", "Plant-Based Milk", "Tofu", "Tempeh"
+    ],
+    "condiments": [
+      "Ketchup", "Mayonnaise", "Mustard", "Soy Sauce", "Hot Sauce", "Worcestershire Sauce",
+      "Barbecue Sauce", "Pesto", "Tahini", "Fish Sauce", "Hoisin Sauce", "Teriyaki Sauce",
+      "Chili Sauce", "Vinegar", "Apple Cider Vinegar", "Balsamic Vinegar", "White Vinegar",
+      "Rice Vinegar"
+    ],
+    "baking": [
+      "Egg", "Flour", "Sugar", "Rice", "Baking Powder", "Baking Soda", "Yeast",
+      "Cocoa Powder", "Vanilla Extract", "Cornstarch", "Gelatin", "Molasses",
+      "Maple Syrup", "Honey", "Brown Sugar", "Powdered Sugar"
+    ],
+    "nuts": [
+      "Almonds", "Walnuts", "Cashews", "Peanuts", "Pistachios", "Sunflower Seeds",
+      "Pumpkin Seeds", "Chia Seeds", "Flaxseeds", "Sesame Seeds"
+    ],
+    "oils": [
+      "Oil", "Olive Oil", "Vegetable Oil", "Canola Oil", "Sunflower Oil",
+      "Coconut Oil", "Sesame Oil", "Peanut Oil", "Butter", "Margarine", "Lard"
+    ],
+    "stocks": [
+      "Chicken Stock", "Beef Stock", "Vegetable Stock", "Fish Stock"
+    ],
+    "misc": [
+      "Breadcrumbs", "Noodles", "Canned Tomatoes", "Tomato Paste", "Tomato Sauce",
+      "Canned Beans", "Canned Tuna", "Canned Corn", "Pickles", "Olives",
+      "Capers", "Anchovies", "Miso Paste", "Nutritional Yeast", "Liquid Smoke"
+    ]
+  },
+  "categories": {
+    "spices": "Spices & Herbs",
+    "grains": "Grains & Legumes",
+    "vegetables": "Vegetables",
+    "fruits": "Fruits",
+    "dairy": "Dairy & Alternatives",
+    "condiments": "Condiments & Sauces",
+    "baking": "Baking Essentials",
+    "nuts": "Nuts & Seeds",
+    "oils": "Oils & Fats",
+    "stocks": "Stocks & Broths",
+    "misc": "Miscellaneous"
+  }
+}
+

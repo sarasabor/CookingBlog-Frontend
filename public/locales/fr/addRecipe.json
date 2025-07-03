@@ -1,0 +1,36 @@
+{
+  "title": "Ajouter une nouvelle recette",
+  "submit": "Soumettre la recette",
+  "loading": "Envoi de la recette...",
+  "success": "Recette ajoutée avec succès !",
+  "errors": {
+    "submit": "Échec de l'ajout de la recette. Veuillez réessayer."
+  },
+  "labelTitle": "Titre",
+  "labelDescription": "Description",
+  "labelIngredients": "Ingrédients (séparés par des virgules)",
+  "labelInstructions": "Instructions",
+  "labelCookTime": "Temps de cuisson (en minutes)",
+  "labelDifficulty": "Difficulté",
+  "labelImage": "Image de la recette",
+  "labelMood": "Humeur",
+  "selectMood": "Sélectionner une humeur",
+  "selectDifficulty": "Sélectionner la difficulté",
+  "difficulty": {
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile"
+  },
+  "moods": {
+  "hungry": "Affamé",
+  "sad": "Triste",
+  "stressed": "Stressé",
+  "tired": "Fatigué",
+  "relaxed": "Détendu",
+  "happy": "Heureux",
+  "bored": "Ennuyé",
+  "romantic": "Romantique",
+  "anxious": "Anxieux",
+  "energetic": "Énergique"
+  }
+}

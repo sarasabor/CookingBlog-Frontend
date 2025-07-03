@@ -24,6 +24,9 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get("http://localhost:5000/api/auth/profile", {
         withCredentials: true,
       });
+
+      console.log("Loaded user:", res.data);
+
       setUser(res.data);
       setIsAuthenticated(true);
       localStorage.setItem("user", JSON.stringify(res.data));

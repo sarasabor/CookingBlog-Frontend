@@ -1,0 +1,32 @@
+{
+  "title": "إضافة وصفة جديدة",
+  "submit": "أضف الوصفة",
+  "errors": {
+    "submit": "فشل في إضافة الوصفة"
+  },
+  "moods": {
+    "select": "اختر المزاج",
+    "hungry": "جائع",
+    "sad": "حزين",
+    "stressed": "مضغوط",
+    "tired": "مرهق",
+    "relaxed": "مرتاح",
+    "happy": "فرح",
+    "bored": "أشعر بالملل",
+    "romantic": "رومانسي",
+    "anxious": "قلق",
+    "energetic": "نشيط"
+  },
+  "fields": {
+    "title": "العنوان",
+    "description": "الوصف",
+    "ingredients": "المكونات (مفصولة بفواصل)",
+    "instructions": "طريقة التحضير",
+    "cookTime": "مدة الطهي (بالدقائق)",
+    "difficulty": "مستوى الصعوبة",
+    "easy": "سهل",
+    "medium": "متوسط",
+    "hard": "صعب",
+    "image": "تحميل صورة"
+  }
+}

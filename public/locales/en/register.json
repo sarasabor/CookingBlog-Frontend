@@ -1,0 +1,15 @@
+{
+"title": "Create a new account",
+"username": "Username",
+"email": "Email",
+"password": "Password",
+"confirm": "Confirm Password",
+"submit": "Register",
+"already": "Already have an account?",
+"loginLink": "Login here",
+"errors": {
+"passwordLength": "Password must be at least 6 characters.",
+"passwordMatch": "Passwords do not match.",
+"registration": "Registration failed. Please try again."
+}
+}

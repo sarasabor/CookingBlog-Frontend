@@ -1,0 +1,61 @@
+{
+  "notFound": "Recipe not found.",
+  "apiError": "Unable to fetch the recipe. Please try again later.",
+  "by": "By",
+  "unknown": "Unknown",
+  "rating": "Rating",
+  "ingredients": "Ingredients",
+  "instructions": "Instructions",
+  "cookTime": "Cook time",
+  "difficulty": "Difficulty",
+  "mood": "Mood",
+  "reviews": "User Reviews",
+  "noReviews": "No reviews yet.",
+  "user": "User",
+  "says": "says",
+  "loading": "Loading...",
+  "ratingRange": "Please choose a number of stars between 1 and 5.",
+  "minutes": "min",
+  "noRating": "No rating yet",
+  "ingredientsTitle": "Ingredients",
+  "instructionsTitle": "Instructions",
+  "userReviews": "User Reviews",
+  "addRating": "Add your rating",
+  "addYourRating": "🌟 Add your rating",
+  "choose": "Choose",
+  "writeComment": "Write your comment here...",
+  "commentPlaceholder": "Write your comment here...",
+  "sending": "Sending...",
+  "submitRating": "Submit Rating",
+  "submit": "Submit review",
+  "submitting": "⏳ Submitting...",
+  "loginToRate": "Please login to submit your rating",
+  "selectStarsWarning": "Please select a rating between 1 and 5",
+  "averageRating": "Average rating",
+  "save": "Save to favorites",
+  "unsave": "Remove from favorites",
+  "noTags": "No tags",
+  "back": "Back to Recipes",
+
+  
+  "moods": {
+    "hungry": "Hungry",
+    "sad": "Sad",
+    "stressed": "Stressed",
+    "tired": "Tired",
+    "relaxed": "Relaxed",
+    "happy": "Happy",
+    "bored": "Bored",
+    "romantic": "Romantic",
+    "anxious": "Anxious",
+    "energetic": "Energetic"
+  },
+
+  "difficultyLevels": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+
+}
+
+}

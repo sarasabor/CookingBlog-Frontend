@@ -1,0 +1,15 @@
+{
+"title": "Créer un nouveau compte",
+"username": "Nom d'utilisateur",
+"email": "Email",
+"password": "Mot de passe",
+"confirm": "Confirmer le mot de passe",
+"submit": "S'inscrire",
+"already": "Vous avez déjà un compte ?",
+"loginLink": "Connectez-vous ici",
+"errors": {
+"passwordLength": "Le mot de passe doit contenir au moins 6 caractères.",
+"passwordMatch": "Les mots de passe ne correspondent pas.",
+"registration": "Échec de l'inscription. Veuillez réessayer."
+}
+}

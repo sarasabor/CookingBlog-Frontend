@@ -1,210 +1,322 @@
-// import React from "react";
-// import { useEffect, useState } from "react";
+// import React, { useEffect, useState, useContext } from "react";
 // import { useParams } from "react-router-dom";
-// import { getRecipeById } from "../services/api";
-// import { motion } from "framer-motion";
+// import api from "../services/api";
+// import { useTranslation } from "react-i18next";
+// import { AuthContext } from "../context/AuthContext";
 
 // function RecipeDetails() {
+//   const { t } = useTranslation("recipeDetails");
 //   const { id } = useParams();
+//   const { user } = useContext(AuthContext);
+
 //   const [recipe, setRecipe] = useState(null);
 //   const [loading, setLoading] = useState(true);
+//   const [newRating, setNewRating] = useState(0);
+//   const [newComment, setNewComment] = useState("");
+//   const [submitting, setSubmitting] = useState(false);
+
+//   const fetchRecipeDetails = async () => {
+//     try {
+//       const res = await api.get(`/recipes/with-reviews/${id}`);
+//       setRecipe(res.data);
+//     } catch (err) {
+//       console.error("❌ Error fetching recipe details:", err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
 //   useEffect(() => {
-//     const fetchRecipe = async () => {
-//       try {
-//         const data = await getRecipeById(id);
-//         setRecipe(data);
-//       } catch (error) {
-//         console.error("Error fetching recipe details:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchRecipe();
+//     fetchRecipeDetails();
 //   }, [id]);
 
-//   if (loading) {
-//     return (
-//       <div className="flex justify-center mt-20">
-//         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-green-500"></div>
-//       </div>
-//     );
-//   }
+//   const handleRatingSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!user) return alert(t("loginToRate"));
+//     if (newRating < 1 || newRating > 5) return alert(t("ratingRange"));
 
-//   if (!recipe) {
-//     return <p className="text-center text-gray-500 mt-10">Recipe not found.</p>;
-//   }
+//     try {
+//       setSubmitting(true);
+//       await api.post(`/reviews/${id}`, {
+//         rating: newRating,
+//         comment: newComment,
+//       });
+//       setNewRating(0);
+//       setNewComment("");
+//       fetchRecipeDetails();
+//     } catch (err) {
+//       console.error("❌ Error submitting rating:", err.response?.data || err);
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   };
+
+//   if (loading) return <p className="text-center py-10">⏳ {t("loading")}</p>;
+//   if (!recipe) return <p className="text-center text-red-500">❌ {t("notFound")}</p>;
 
 //   return (
 //     <div className="max-w-4xl mx-auto px-4 py-10">
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5 }}
-//         className="bg-white rounded-2xl shadow-lg overflow-hidden"
-//       >
+//       <h1 className="text-3xl font-bold text-[#2d4032] mb-4">{recipe.title}</h1>
+
+//       {recipe.image && (
 //         <img
 //           src={recipe.image}
 //           alt={recipe.title}
-//           className="w-full h-64 object-cover"
+//           className="w-full h-64 object-cover rounded-lg shadow mb-4"
 //         />
-//         <div className="p-6">
-//           <h2 className="text-3xl font-bold text-gray-800 mb-2">{recipe.title}</h2>
-//           <p className="text-gray-600 mb-4">By {recipe.userId?.username || "Unknown"}</p>
+//       )}
 
-//           <div className="flex items-center gap-2 text-yellow-500 mb-4">
-//             <span className="text-sm font-medium text-gray-600">Rating:</span>
-//             <span className="text-lg">⭐ {recipe.averageRating || "N/A"}</span>
+//       <div className="mb-2 text-gray-600">
+//         🧠 <span className="capitalize">{recipe.mood}</span> · 🕒 {recipe.cookTime} {t("minutes")} · 🎯 {recipe.difficulty}
+//       </div>
+
+//       {recipe.averageRating !== undefined && (
+//         <p className="text-sm text-yellow-600 font-medium mb-2">
+//           ⭐  {recipe.averageRating != null ? `${recipe.averageRating.toFixed(1)} ⭐` : t("noRating")}
+//         </p>
+//       )}
+
+//       <div className="mb-6">
+//         <h3 className="text-lg font-semibold mb-1">📋 {t("ingredientsTitle")}</h3>
+//         <ul className="list-disc list-inside text-gray-800">
+//           {recipe.ingredients.map((ing, idx) => (
+//             <li key={idx}>{ing}</li>
+//           ))}
+//         </ul>
+//       </div>
+
+//       <div className="mb-6">
+//         <h3 className="text-lg font-semibold mb-1">👨‍🍳 {t("instructionsTitle")}</h3>
+//         <p className="text-gray-800 whitespace-pre-line">{recipe.instructions}</p>
+//       </div>
+
+//       <div className="mt-6">
+//         <h3 className="text-lg font-semibold mb-2">📝 {t("userReviews")}</h3>
+//         {recipe.reviews?.length > 0 ? (
+//           recipe.reviews.map((rev) => (
+//             <div key={rev._id} className="border rounded p-3 mb-3 shadow">
+//               <p className="text-sm font-semibold">⭐ {rev.rating} / 5</p>
+//               <p className="text-sm text-gray-700">{rev.comment}</p>
+//               <p className="text-xs text-gray-400 mt-1">
+//                 {new Date(rev.createdAt).toLocaleDateString()}
+//               </p>
+//             </div>
+//           ))
+//         ) : (
+//           <p className="text-sm text-gray-500">{t("noReviews")}</p>
+//         )}
+//       </div>
+
+//       {user && (
+//         <form onSubmit={handleRatingSubmit} className="mt-8 bg-gray-100 p-4 rounded-lg shadow">
+//           <h3 className="text-lg font-semibold mb-2">🌟 {t("addRating")}</h3>
+
+//           <div className="flex items-center gap-2 mb-3">
+//             <label htmlFor="rating" className="text-sm">{t("stars")}</label>
+//             <select
+//               id="rating"
+//               value={newRating}
+//               onChange={(e) => setNewRating(Number(e.target.value))}
+//               className="border rounded px-2 py-1"
+//               required
+//             >
+//               <option value="">{t("choose")}</option>
+//               {[1, 2, 3, 4, 5].map((r) => (
+//                 <option key={r} value={r}>{r}</option>
+//               ))}
+//             </select>
 //           </div>
 
-//           <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-//             {recipe.description}
-//           </p>
-//         </div>
-//       </motion.div>
+//           <textarea
+//             placeholder={t("writeComment")}
+//             value={newComment}
+//             onChange={(e) => setNewComment(e.target.value)}
+//             className="w-full h-24 border rounded px-3 py-2 text-sm"
+//           />
+
+//           <button
+//             type="submit"
+//             className="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+//             disabled={submitting}
+//           >
+//             {submitting ? t("sending") : t("submitRating")}
+//           </button>
+//         </form>
+//       )}
 //     </div>
 //   );
 // }
 
 // export default RecipeDetails;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getRecipeById, getReviewsByRecipe } from "../services/api";
+import api from "../services/api";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { AuthContext } from "../context/AuthContext";
 
 function RecipeDetails() {
+  const { t, i18n } = useTranslation("recipeDetails");
+  const currentLang = i18n.language;
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { user } = useContext(AuthContext);
+
   const [recipe, setRecipe] = useState(null);
-  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [newRating, setNewRating] = useState(0);
+  const [newComment, setNewComment] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRecipeDetails = async () => {
       try {
-        const data = await getRecipeById(id);
-        setRecipe(data);
-      } catch (error) {
-        console.error("Error loading recipe:", error);
+        const res = await api.get(`/recipes/with-reviews/${id}`);
+        setRecipe(res.data);
+      } catch (err) {
+        console.error("❌", t("apiError"), err);
+      } finally {
+        setLoading(false);
       }
     };
+    fetchRecipeDetails();
+  }, [id, t]);
 
-    const fetchReviews = async () => {
-      try {
-        const res = await getReviewsByRecipe(id);
-        setReviews(res);
-      } catch (error) {
-        console.error("Error loading reviews:", error);
-      }
-    };
+  const handleRatingSubmit = async (e) => {
+    e.preventDefault();
+    if (!user) return alert(t("loginToRate"));
+    if (newRating < 1 || newRating > 5) return alert(t("selectStarsWarning"));
 
-    Promise.all([fetchData(), fetchReviews()]).finally(() =>
-      setLoading(false)
-    );
-  }, [id]);
+    try {
+      setSubmitting(true);
+      await api.post(`/reviews/${id}`, {
+        rating: newRating,
+        comment: newComment,
+      });
+      setNewRating(0);
+      setNewComment("");
+      const res = await api.get(`/recipes/with-reviews/${id}`);
+      setRecipe(res.data);
+    } catch (err) {
+      console.error("❌ Error submitting rating:", err.response?.data || err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center mt-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-green-500"></div>
-      </div>
-    );
-  }
-
-  if (!recipe) {
-    return <p className="text-center text-gray-500 mt-10">{t("recipe.notFound")}</p>;
-  }
+  if (loading) return <p className="text-center py-10">⏳ {t("loading")}</p>;
+  if (!recipe) return <p className="text-center text-red-500">❌ {t("notFound")}</p>;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="bg-white rounded-2xl shadow-lg overflow-hidden"
-      >
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      {/* Title */}
+      <h1 className="text-3xl font-bold text-[#2d4032] mb-4">
+        {(recipe.title && recipe.title[currentLang]) || t("unknown")}
+      </h1>
+
+      {/* Image */}
+      {recipe.image && (
         <img
           src={recipe.image}
-          alt={recipe.title}
-          className="w-full h-64 object-cover"
+          alt={recipe.title?.[currentLang] || t("unknown")}
+          className="w-full h-64 object-cover rounded-lg shadow mb-4"
         />
-        <div className="p-6">
-          <h2 className="text-3xl font-bold text-[#2d4032] mb-2">
-            {recipe.title}
-          </h2>
-          <p className="text-gray-600 mb-3">
-            {t("recipe.by")} {recipe.userId?.username || t("recipe.unknown")}
-          </p>
+      )}
 
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-sm font-medium text-gray-600">
-              {t("recipe.rating")}:
-            </span>
-            <span className="text-yellow-500 text-lg">
-              ⭐ {recipe.averageRating || "N/A"}
-            </span>
-          </div>
+      {/* Info */}
+      <div className="mb-3 text-gray-600 text-sm flex flex-wrap gap-2">
+        <span>🧠 {t(`moods.${recipe.mood}`)}</span>
+        <span>· 🕒 {recipe.cookTime} {t("minutes")}</span>
+        <span>· 🎯 {t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}</span>
+      </div>
 
-          <p className="text-gray-700 whitespace-pre-line leading-relaxed mb-4">
-            {recipe.description}
-          </p>
+      {/* Average Rating */}
+      {recipe.averageRating !== undefined && (
+        <p className="text-sm text-yellow-600 font-medium mb-4">
+          ⭐ {recipe.averageRating != null ? `${recipe.averageRating.toFixed(1)} / 5` : t("noRating")}
+        </p>
+      )}
 
-          <div className="text-sm text-gray-700 space-y-2">
-            <p>
-              <strong>{t("recipe.ingredients")}:</strong>{" "}
-              {recipe.ingredients}
-            </p>
-            <p>
-              <strong>{t("recipe.instructions")}:</strong>{" "}
-              {recipe.instructions}
-            </p>
-            <p>
-              <strong>{t("recipe.cookTime")}:</strong>{" "}
-              {recipe.cookTime} {t("recipe.minutes")}
-            </p>
-            <p>
-              <strong>{t("recipe.difficulty")}:</strong> {recipe.difficulty}
-            </p>
-            <p>
-              <strong>{t("recipe.mood")}:</strong>{" "}
-              {t(`addRecipe.fields.${recipe.mood}`)}
-            </p>
-          </div>
-        </div>
-      </motion.div>
+      {/* Ingredients */}
+      <section className="mb-6">
+        <h3 className="text-lg font-semibold mb-2">📋 {t("ingredientsTitle")}</h3>
+        <ul className="list-disc list-inside text-gray-800">
+          {Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0 ? (
+            recipe.ingredients.map((ing, idx) =>
+              ing.name?.[currentLang] ? (
+                <li key={idx}>
+                  {ing.name[currentLang]} {ing.quantity && `- ${ing.quantity}`}
+                </li>
+              ) : null
+            )
+          ) : (
+            <p className="text-sm text-gray-500">{t("noTags")}</p>
+          )}
+        </ul>
+      </section>
+
+      {/* Instructions */}
+      <section className="mb-6">
+        <h3 className="text-lg font-semibold mb-2">👨‍🍳 {t("instructionsTitle")}</h3>
+        <p className="text-gray-800 whitespace-pre-line">
+          {recipe.instructions?.[currentLang] || t("unknown")}
+        </p>
+      </section>
 
       {/* Reviews */}
-      <div className="mt-10">
-        <h3 className="text-2xl font-semibold text-[#2d4032] mb-4">
-          🗨️ {t("recipe.reviews")}
-        </h3>
-        {reviews.length === 0 ? (
-          <p className="text-gray-500">{t("recipe.noReviews")}</p>
+      <section className="mb-6">
+        <h3 className="text-lg font-semibold mb-2">📝 {t("userReviews")}</h3>
+        {recipe.reviews?.length > 0 ? (
+          recipe.reviews.map((rev) => (
+            <div key={rev._id} className="border rounded p-3 mb-3 shadow">
+              <p className="text-sm font-semibold">⭐ {rev.rating} / 5</p>
+              <p className="text-sm text-gray-700">{rev.comment}</p>
+              <p className="text-xs text-gray-400 mt-1">
+                {new Date(rev.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          ))
         ) : (
-          <div className="space-y-4">
-            {reviews.map((review) => (
-              <div
-                key={review._id}
-                className="bg-gray-50 border rounded-xl p-4 shadow-sm"
-              >
-                <p className="text-gray-700 mb-1">
-                  <span className="font-semibold">
-                    {review.username || t("recipe.user")}
-                  </span>{" "}
-                  {t("recipe.says")}:
-                </p>
-                <p className="text-gray-600 italic">"{review.comment}"</p>
-                <p className="text-yellow-500 text-sm mt-1">
-                  ⭐ {review.rating}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p className="text-sm text-gray-500">{t("noReviews")}</p>
         )}
-      </div>
+      </section>
+
+      {/* Add Review */}
+      {user && (
+        <form onSubmit={handleRatingSubmit} className="bg-gray-100 p-4 rounded-lg shadow">
+          <h3 className="text-lg font-semibold mb-2">{t("addYourRating")}</h3>
+
+          <div className="flex items-center gap-2 mb-3">
+            <label htmlFor="rating" className="text-sm">{t("stars")}</label>
+            <select
+              id="rating"
+              value={newRating}
+              onChange={(e) => setNewRating(Number(e.target.value))}
+              className="border rounded px-2 py-1"
+              required
+            >
+              <option value="">{t("choose")}</option>
+              {[1, 2, 3, 4, 5].map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </div>
+
+          <textarea
+            placeholder={t("commentPlaceholder")}
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            className="w-full h-24 border rounded px-3 py-2 text-sm mb-3"
+          />
+
+          <button
+            type="submit"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+            disabled={submitting}
+          >
+            {submitting ? t("submitting") : t("submit")}
+          </button>
+        </form>
+      )}
     </div>
   );
 }

@@ -1,0 +1,36 @@
+{
+  "title": "Add a New Recipe",
+  "submit": "Submit Recipe",
+  "loading": "Submitting recipe...",
+  "success": "Recipe added successfully!",
+  "errors": {
+    "submit": "Failed to add the recipe. Please try again."
+  },
+  "labelTitle": "Title",
+  "labelDescription": "Description",
+  "labelIngredients": "Ingredients (comma separated)",
+  "labelInstructions": "Instructions",
+  "labelCookTime": "Cook Time (in minutes)",
+  "labelDifficulty": "Difficulty",
+  "labelImage": "Recipe Image",
+  "labelMood": "Mood",
+  "selectMood": "Select a mood",
+  "selectDifficulty": "Select difficulty",
+  "difficulty": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+  },
+  "moods": {
+     "hungry": "Hungry",
+     "sad": "Sad",
+     "stressed": "Stressed",
+     "tired": "Tired",
+     "relaxed": "Relaxed",
+     "happy": "Happy",
+     "bored": "Bored",
+     "romantic": "Romantic",
+     "anxious": "Anxious",
+     "energetic": "Energetic"
+  }
+}

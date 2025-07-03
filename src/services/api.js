@@ -14,11 +14,15 @@ const res = await api.get(`/recipes/${id}`);
 return res.data;
 };
 
-export const getAllRecipes = async ({ page = 1, search = "" }) => {
-const res = await api.get(`/recipes`, {
-  params: { page, search },
-});
-return res.data;
+export const getAllRecipes = async ({ page = 1, search = "", mood = "" }) => {
+  const res = await api.get(`/recipes`, {
+    params: {
+      page,
+      search,
+      ...(mood && { mood }), // ✅ mood فقط إلا كانت موجودة
+    },
+  });
+  return res.data;
 };
 
 export const getReviewsByRecipe = async (recipeId) => {

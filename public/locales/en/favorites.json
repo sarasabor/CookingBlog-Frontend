@@ -1,0 +1,32 @@
+{
+  "title": "Your Favorite Recipes",
+  "searchPlaceholder": "Search by title...",
+  "allMoods": "All moods",
+  "allTimes": "All cook times",
+  "shortTime": "Less than 30 min",
+  "mediumTime": "30 to 60 min",
+  "longTime": "More than 1 hour",
+  "noResults": "No recipes match your filters.",
+  "loading": "Loading favorites...",
+  "remove": "Remove from favorites",
+  "moods": [
+    { "key": "all", "label": "All moods" },
+    { "key": "hungry", "label": "Hungry" },
+    { "key": "sad", "label": "Sad" },
+    { "key": "stressed", "label": "Stressed" },
+    { "key": "tired", "label": "Tired" },
+    { "key": "relaxed", "label": "Relaxed" },
+    { "key": "happy", "label": "Happy" },
+    { "key": "bored", "label": "Bored" },
+    { "key": "romantic", "label": "Romantic" },
+    { "key": "anxious", "label": "Anxious" },
+    { "key": "energetic", "label": "Energetic" }
+  ],
+"timeFilters": [
+  { "key": "all", "label": "All times" },
+  { "key": "short", "label": "Short (≤ 15 min)" },
+  { "key": "medium", "label": "Medium (15–45 min)" },
+  { "key": "long", "label": "Long (> 45 min)" }
+]
+
+}

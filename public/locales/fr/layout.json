@@ -1,0 +1,11 @@
+{
+  "home": "Accueil",
+  "recipes": "Recettes",
+  "addRecipe": "Ajouter une recette",
+  "moodSuggestions": "Par humeur",
+  "smartSuggestions": "Recherche intelligente",
+  "whyMood": "Pourquoi des recettes selon l'humeur ?",
+  "register": "S'inscrire",
+  "login": "Connexion",
+  "logout": "Déconnexion"
+}
