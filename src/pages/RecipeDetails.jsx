@@ -1,154 +1,3 @@
-// import React, { useEffect, useState, useContext } from "react";
-// import { useParams } from "react-router-dom";
-// import api from "../services/api";
-// import { useTranslation } from "react-i18next";
-// import { AuthContext } from "../context/AuthContext";
-
-// function RecipeDetails() {
-//   const { t } = useTranslation("recipeDetails");
-//   const { id } = useParams();
-//   const { user } = useContext(AuthContext);
-
-//   const [recipe, setRecipe] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [newRating, setNewRating] = useState(0);
-//   const [newComment, setNewComment] = useState("");
-//   const [submitting, setSubmitting] = useState(false);
-
-//   const fetchRecipeDetails = async () => {
-//     try {
-//       const res = await api.get(`/recipes/with-reviews/${id}`);
-//       setRecipe(res.data);
-//     } catch (err) {
-//       console.error("❌ Error fetching recipe details:", err);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchRecipeDetails();
-//   }, [id]);
-
-//   const handleRatingSubmit = async (e) => {
-//     e.preventDefault();
-//     if (!user) return alert(t("loginToRate"));
-//     if (newRating < 1 || newRating > 5) return alert(t("ratingRange"));
-
-//     try {
-//       setSubmitting(true);
-//       await api.post(`/reviews/${id}`, {
-//         rating: newRating,
-//         comment: newComment,
-//       });
-//       setNewRating(0);
-//       setNewComment("");
-//       fetchRecipeDetails();
-//     } catch (err) {
-//       console.error("❌ Error submitting rating:", err.response?.data || err);
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   if (loading) return <p className="text-center py-10">⏳ {t("loading")}</p>;
-//   if (!recipe) return <p className="text-center text-red-500">❌ {t("notFound")}</p>;
-
-//   return (
-//     <div className="max-w-4xl mx-auto px-4 py-10">
-//       <h1 className="text-3xl font-bold text-[#2d4032] mb-4">{recipe.title}</h1>
-
-//       {recipe.image && (
-//         <img
-//           src={recipe.image}
-//           alt={recipe.title}
-//           className="w-full h-64 object-cover rounded-lg shadow mb-4"
-//         />
-//       )}
-
-//       <div className="mb-2 text-gray-600">
-//         🧠 <span className="capitalize">{recipe.mood}</span> · 🕒 {recipe.cookTime} {t("minutes")} · 🎯 {recipe.difficulty}
-//       </div>
-
-//       {recipe.averageRating !== undefined && (
-//         <p className="text-sm text-yellow-600 font-medium mb-2">
-//           ⭐  {recipe.averageRating != null ? `${recipe.averageRating.toFixed(1)} ⭐` : t("noRating")}
-//         </p>
-//       )}
-
-//       <div className="mb-6">
-//         <h3 className="text-lg font-semibold mb-1">📋 {t("ingredientsTitle")}</h3>
-//         <ul className="list-disc list-inside text-gray-800">
-//           {recipe.ingredients.map((ing, idx) => (
-//             <li key={idx}>{ing}</li>
-//           ))}
-//         </ul>
-//       </div>
-
-//       <div className="mb-6">
-//         <h3 className="text-lg font-semibold mb-1">👨‍🍳 {t("instructionsTitle")}</h3>
-//         <p className="text-gray-800 whitespace-pre-line">{recipe.instructions}</p>
-//       </div>
-
-//       <div className="mt-6">
-//         <h3 className="text-lg font-semibold mb-2">📝 {t("userReviews")}</h3>
-//         {recipe.reviews?.length > 0 ? (
-//           recipe.reviews.map((rev) => (
-//             <div key={rev._id} className="border rounded p-3 mb-3 shadow">
-//               <p className="text-sm font-semibold">⭐ {rev.rating} / 5</p>
-//               <p className="text-sm text-gray-700">{rev.comment}</p>
-//               <p className="text-xs text-gray-400 mt-1">
-//                 {new Date(rev.createdAt).toLocaleDateString()}
-//               </p>
-//             </div>
-//           ))
-//         ) : (
-//           <p className="text-sm text-gray-500">{t("noReviews")}</p>
-//         )}
-//       </div>
-
-//       {user && (
-//         <form onSubmit={handleRatingSubmit} className="mt-8 bg-gray-100 p-4 rounded-lg shadow">
-//           <h3 className="text-lg font-semibold mb-2">🌟 {t("addRating")}</h3>
-
-//           <div className="flex items-center gap-2 mb-3">
-//             <label htmlFor="rating" className="text-sm">{t("stars")}</label>
-//             <select
-//               id="rating"
-//               value={newRating}
-//               onChange={(e) => setNewRating(Number(e.target.value))}
-//               className="border rounded px-2 py-1"
-//               required
-//             >
-//               <option value="">{t("choose")}</option>
-//               {[1, 2, 3, 4, 5].map((r) => (
-//                 <option key={r} value={r}>{r}</option>
-//               ))}
-//             </select>
-//           </div>
-
-//           <textarea
-//             placeholder={t("writeComment")}
-//             value={newComment}
-//             onChange={(e) => setNewComment(e.target.value)}
-//             className="w-full h-24 border rounded px-3 py-2 text-sm"
-//           />
-
-//           <button
-//             type="submit"
-//             className="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
-//             disabled={submitting}
-//           >
-//             {submitting ? t("sending") : t("submitRating")}
-//           </button>
-//         </form>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default RecipeDetails;
-
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
@@ -208,12 +57,11 @@ function RecipeDetails() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
-      {/* Title */}
+
       <h1 className="text-3xl font-bold text-[#2d4032] mb-4">
         {(recipe.title && recipe.title[currentLang]) || t("unknown")}
       </h1>
 
-      {/* Image */}
       {recipe.image && (
         <img
           src={recipe.image}
@@ -221,22 +69,18 @@ function RecipeDetails() {
           className="w-full h-64 object-cover rounded-lg shadow mb-4"
         />
       )}
-
-      {/* Info */}
       <div className="mb-3 text-gray-600 text-sm flex flex-wrap gap-2">
         <span>🧠 {t(`moods.${recipe.mood}`)}</span>
         <span>· 🕒 {recipe.cookTime} {t("minutes")}</span>
         <span>· 🎯 {t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}</span>
       </div>
 
-      {/* Average Rating */}
       {recipe.averageRating !== undefined && (
         <p className="text-sm text-yellow-600 font-medium mb-4">
           ⭐ {recipe.averageRating != null ? `${recipe.averageRating.toFixed(1)} / 5` : t("noRating")}
         </p>
       )}
 
-      {/* Ingredients */}
       <section className="mb-6">
         <h3 className="text-lg font-semibold mb-2">📋 {t("ingredientsTitle")}</h3>
         <ul className="list-disc list-inside text-gray-800">
@@ -254,7 +98,6 @@ function RecipeDetails() {
         </ul>
       </section>
 
-      {/* Instructions */}
       <section className="mb-6">
         <h3 className="text-lg font-semibold mb-2">👨‍🍳 {t("instructionsTitle")}</h3>
         <p className="text-gray-800 whitespace-pre-line">
@@ -262,7 +105,6 @@ function RecipeDetails() {
         </p>
       </section>
 
-      {/* Reviews */}
       <section className="mb-6">
         <h3 className="text-lg font-semibold mb-2">📝 {t("userReviews")}</h3>
         {recipe.reviews?.length > 0 ? (
@@ -280,7 +122,6 @@ function RecipeDetails() {
         )}
       </section>
 
-      {/* Add Review */}
       {user && (
         <form onSubmit={handleRatingSubmit} className="bg-gray-100 p-4 rounded-lg shadow">
           <h3 className="text-lg font-semibold mb-2">{t("addYourRating")}</h3>

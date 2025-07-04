@@ -42,7 +42,6 @@ function Recipes() {
         🍲 {t("title")}
       </h1>
 
-      {/* 🎯 Mood Filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-6">
         {moods.map((mood) => (
           <button
@@ -62,7 +61,6 @@ function Recipes() {
         ))}
       </div>
 
-      {/* 🔍 Search input */}
       <div className="flex justify-center mb-8">
         <input
           type="text"
@@ -76,7 +74,6 @@ function Recipes() {
         />
       </div>
 
-      {/* 🌀 Recipes list */}
       {loading ? (
         <p className="text-center text-gray-500">{t("loading")}</p>
       ) : recipes.length === 0 ? (
@@ -88,8 +85,7 @@ function Recipes() {
           ))}
         </div>
       )}
-
-      {/* 📄 Pagination */}
+  
       <div className="mt-10 flex flex-wrap justify-center gap-2">
         {Array.from({ length: totalPages }, (_, i) => (
           <button

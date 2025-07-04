@@ -10,7 +10,6 @@ import SmartSuggestions from "./pages/SmartSuggestions";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProtectedRoute from "../src/context/components/ProtectedRoute";
-import TestTranslation from "./pages/TestTranslation";
 import Favorites from "./pages/Favorites";
 import MoodScience from "./pages/MoodScience";
 
@@ -33,7 +32,6 @@ function App() {
           <Route path="suggestions/smart" element={<SmartSuggestions />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="/test" element={<TestTranslation />} />
           <Route path="/recipes/:id" element={<RecipeDetails />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/why-mood-suggestions" element={<MoodScience />} />

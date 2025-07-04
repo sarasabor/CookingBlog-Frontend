@@ -10,5 +10,5 @@ export const AuthContext = createContext({
   logout: () => {},
 });
 
-// ✅ Custom hook for easier usage
+// Custom hook for easier usage
 export const useAuth = () => useContext(AuthContext);
