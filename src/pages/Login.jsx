@@ -22,7 +22,7 @@ try {
   await login(form);
   navigate("/recipes");
 } catch (err) {
-  setError(err.response?.data?.message || t("errors.login"));
+  setError(err.response?.data?.message || t("error"));
 }
 };
 
@@ -60,7 +60,7 @@ return (
     />
 
     {error && (
-      <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+      <p className="text-red-500 text-sm mb-4 text-center">{t("error")}</p>
     )}
 
     <button

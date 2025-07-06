@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext"; 
+import { AuthContext } from "../context/AuthContext";
 
 function AddRecipe() {
   const { t } = useTranslation("addRecipe");
   const navigate = useNavigate();
-  const { currentUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  if (!currentUser || currentUser.role !== "admin") {
+  if (!user || user.role !== "admin") {
     return (
       <div className="flex justify-center items-center h-96">
         <p className="text-red-500 text-lg font-semibold text-center">
@@ -23,12 +23,15 @@ function AddRecipe() {
     title: "",
     description: "",
     mood: "",
-    ingredients: "",
     instructions: "",
     cookTime: "",
     difficulty: "",
     image: null,
   });
+
+  const [ingredients, setIngredients] = useState([
+    { en: "", fr: "", ar: "", quantity: "" },
+  ]);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,6 +54,7 @@ function AddRecipe() {
     for (const key in form) {
       formData.append(key, form[key]);
     }
+    formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
       await axios.post("http://localhost:5000/api/recipes", formData, {
@@ -103,27 +107,74 @@ function AddRecipe() {
           required
         >
           <option value="">{t("selectMood")}</option>
-          <option value="hungry">{t("hungry")}</option>
-          <option value="sad">{t("sad")}</option>
-          <option value="stressed">{t("stressed")}</option>
-          <option value="tired">{t("tired")}</option>
-          <option value="relaxed">{t("relaxed")}</option>
-          <option value="happy">{t("happy")}</option>
-          <option value="bored">{t("bored")}</option>
-          <option value="romantic">{t("romantic")}</option>
-          <option value="anxious">{t("anxious")}</option>
-          <option value="energetic">{t("energetic")}</option>
+          {["hungry", "sad", "stressed", "tired", "relaxed", "happy", "bored", "romantic", "anxious", "energetic"].map(
+            (m) => (
+              <option key={m} value={m}>{t(m)}</option>
+            )
+          )}
         </select>
 
-        <input
-          type="text"
-          name="ingredients"
-          placeholder={t("labelIngredients")}
-          value={form.ingredients}
-          onChange={handleChange}
-          className="w-full p-3 border rounded-lg bg-[#fdfcf8]"
-          required
-        />
+        <div>
+          <label className="block font-medium mb-2">{t("labelIngredients")}</label>
+          {ingredients.map((ing, index) => (
+            <div key={index} className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+              <input
+                type="text"
+                placeholder="English"
+                value={ing.en}
+                onChange={(e) => {
+                  const updated = [...ingredients];
+                  updated[index].en = e.target.value;
+                  setIngredients(updated);
+                }}
+                className="p-2 border rounded bg-[#fdfcf8]"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Français"
+                value={ing.fr}
+                onChange={(e) => {
+                  const updated = [...ingredients];
+                  updated[index].fr = e.target.value;
+                  setIngredients(updated);
+                }}
+                className="p-2 border rounded bg-[#fdfcf8]"
+                required
+              />
+              <input
+                type="text"
+                placeholder="العربية"
+                value={ing.ar}
+                onChange={(e) => {
+                  const updated = [...ingredients];
+                  updated[index].ar = e.target.value;
+                  setIngredients(updated);
+                }}
+                className="p-2 border rounded bg-[#fdfcf8]"
+                required
+              />
+              <input
+                type="text"
+                placeholder={t("quantity")}
+                value={ing.quantity}
+                onChange={(e) => {
+                  const updated = [...ingredients];
+                  updated[index].quantity = e.target.value;
+                  setIngredients(updated);
+                }}
+                className="p-2 border rounded bg-[#fdfcf8]"
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => setIngredients([...ingredients, { en: "", fr: "", ar: "", quantity: "" }])}
+            className="text-green-700 font-semibold"
+          >
+            + {t("addIngredient")}
+          </button>
+        </div>
 
         <textarea
           name="instructions"

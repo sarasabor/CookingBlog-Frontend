@@ -5,9 +5,13 @@ import { AuthContext } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
+
+
+
+
 function RecipeCard({ recipe, hideFavoriteButton = false }) {
   const { t, i18n } = useTranslation("recipeDetails");
-  const lang = i18n.language;
+  const lang = i18n.language.slice(0, 2); // ✅ دعم en, fr, ar فقط
   const navigate = useNavigate();
 
   const imageSrc = recipe.image || "https://via.placeholder.com/400x200?text=No+Image";
