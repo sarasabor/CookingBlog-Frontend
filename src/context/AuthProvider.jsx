@@ -21,7 +21,8 @@ export const AuthProvider = ({ children }) => {
   const loadUser = useCallback(async () => {
     try {
       setIsLoading(true);
-      const res = await axios.get("http://localhost:5000/api/auth/profile", {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const res = await axios.get(`${apiUrl}/auth/profile`, {
         withCredentials: true,
       });
 
@@ -39,8 +40,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async ({ email, password }) => {
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     await axios.post(
-      "http://localhost:5000/api/auth/login",
+      `${apiUrl}/auth/login`,
       { email, password },
       { withCredentials: true }
     );
@@ -48,14 +50,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (data) => {
-    await axios.post("http://localhost:5000/api/auth/register", data, {
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    await axios.post(`${apiUrl}/auth/register`, data, {
       withCredentials: true,
     });
   };
 
   const logout = async () => {
     try {
-      await axios.get("http://localhost:5000/api/auth/logout", {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      await axios.get(`${apiUrl}/auth/logout`, {
         withCredentials: true,
       });
     } catch (err) {

@@ -22,7 +22,8 @@ ns: [
 "recipeDetails",
 "moodSuggestions",
 "smartSuggestions",
-
+"favorites",
+"moodScience",
 ],
 defaultNS: "layout",
 backend: {

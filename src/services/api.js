@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://localhost:5000/api";
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const api = axios.create({
 baseURL: API_BASE_URL,
@@ -26,6 +26,6 @@ export const getAllRecipes = async ({ page = 1, search = "", mood = "" }) => {
 };
 
 export const getReviewsByRecipe = async (recipeId) => {
-const res = await api.get(/reviews/`${recipeId}`);
+const res = await api.get(`/reviews/${recipeId}`);
 return res.data;
 };
