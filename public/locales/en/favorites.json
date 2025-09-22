@@ -22,11 +22,13 @@
     { "key": "anxious", "label": "Anxious" },
     { "key": "energetic", "label": "Energetic" }
   ],
-"timeFilters": [
+  "timeFilters": [
   { "key": "all", "label": "All times" },
   { "key": "short", "label": "Short (≤ 15 min)" },
   { "key": "medium", "label": "Medium (15–45 min)" },
   { "key": "long", "label": "Long (> 45 min)" }
-]
-
+],
+"search": "Search",
+"mood": "Mood",
+"time": "Time"
 }

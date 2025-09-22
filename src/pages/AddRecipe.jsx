@@ -100,20 +100,27 @@ function AddRecipe() {
           required
         />
 
-        <select
-          name="mood"
-          value={form.mood}
-          onChange={handleChange}
-          className="w-full p-3 border rounded-lg bg-[#fdfcf8]"
-          required
-        >
-          <option value="">{t("selectMood")}</option>
-          {["hungry", "sad", "stressed", "tired", "relaxed", "happy", "bored", "romantic", "anxious", "energetic"].map(
-            (m) => (
-              <option key={m} value={m}>{t(m)}</option>
-            )
-          )}
-        </select>
+        <div className="relative">
+          <select
+            name="mood"
+            value={form.mood}
+            onChange={handleChange}
+            className="w-full appearance-none bg-gray-50 rounded-xl p-4 pr-12 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 font-medium shadow-sm"
+            required
+          >
+            <option value="">{t("selectMood")}</option>
+            {["hungry", "sad", "stressed", "tired", "relaxed", "happy", "bored", "romantic", "anxious", "energetic"].map(
+              (m) => (
+                <option key={m} value={m}>{t(m)}</option>
+              )
+            )}
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
 
         <div>
           <label className="block font-medium mb-2">{t("labelIngredients")}</label>
@@ -171,7 +178,7 @@ function AddRecipe() {
           <button
             type="button"
             onClick={() => setIngredients([...ingredients, { en: "", fr: "", ar: "", quantity: "" }])}
-            className="text-green-700 font-semibold"
+            className="btn-outline btn-small"
           >
             + {t("addIngredient")}
           </button>
@@ -197,18 +204,25 @@ function AddRecipe() {
           required
         />
 
-        <select
-          name="difficulty"
-          value={form.difficulty}
-          onChange={handleChange}
-          className="w-full p-3 border rounded-lg bg-[#fdfcf8]"
-          required
-        >
-          <option value="">{t("selectDifficulty")}</option>
-          <option value="easy">{t("difficulty.easy")}</option>
-          <option value="medium">{t("difficulty.medium")}</option>
-          <option value="hard">{t("difficulty.hard")}</option>
-        </select>
+        <div className="relative">
+          <select
+            name="difficulty"
+            value={form.difficulty}
+            onChange={handleChange}
+            className="w-full appearance-none bg-gray-50 rounded-xl p-4 pr-12 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 font-medium shadow-sm"
+            required
+          >
+            <option value="">{t("selectDifficulty")}</option>
+            <option value="easy">{t("difficulty.easy")}</option>
+            <option value="medium">{t("difficulty.medium")}</option>
+            <option value="hard">{t("difficulty.hard")}</option>
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
 
         <input
           type="file"
@@ -223,10 +237,17 @@ function AddRecipe() {
 
         <button
           type="submit"
-          className="w-full bg-[#567158] text-white py-2 rounded-lg hover:bg-[#3f5744] transition"
+          className={`w-full btn-primary ${loading ? 'btn-loading' : ''}`}
           disabled={loading}
         >
-          {loading ? t("loading") : t("submit")}
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+              {t("loading")}
+            </div>
+          ) : (
+            t("submit")
+          )}
         </button>
       </form>
     </div>

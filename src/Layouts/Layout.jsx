@@ -162,7 +162,7 @@ function Layout() {
   </div>
 
   {/* Bottom copyright */}
-  <div className="mt-10 border-t border-green-300 pt-6 text-center text-sm text-gray-300">
+  <div className="mt-10 border-t border-green-900 pt-6 text-center text-sm text-gray-300">
     © {new Date().getFullYear()} MoodBite Kitchen. All rights reserved.
   </div>
 </footer>
@@ -211,12 +211,12 @@ function AnimatedLinks({ t, isAuthenticated, user, logout, closeSidebar }) {
           </motion.div>
           <motion.div variants={linkVariants}>
             <Link to="/why-mood-suggestions" onClick={close} className="hover:underline">
-              🧠 {t("whyMood")}
+              {t("whyMood")}
             </Link>
           </motion.div>
           <motion.div variants={linkVariants}>
             <Link to="/favorites" onClick={close} className="hover:underline">
-              ❤️ {t("favorites")}
+              {t("favorites")}
             </Link>
           </motion.div>
         </>
@@ -271,8 +271,8 @@ function NavLinks({ t, isAuthenticated, user, logout }) {
          
           <Link to="/suggestions/mood" className="hover:underline">{t("moodSuggestions")}</Link>
           <Link to="/suggestions/smart" className="hover:underline">{t("smartSuggestions")}</Link>
-          <Link to="/why-mood-suggestions" className="hover:underline">🧠 {t("whyMood")}</Link>
-          <Link to="/favorites" className="hover:underline">❤️ {t("favorites")}</Link>
+          <Link to="/why-mood-suggestions" className="hover:underline">{t("whyMood")}</Link>
+          <Link to="/favorites" className="hover:underline">{t("favorites")}</Link>
         </>
       )}
 
@@ -285,8 +285,8 @@ function NavLinks({ t, isAuthenticated, user, logout }) {
 
       {isAuthenticated && (
         <>
-          <span className="font-semibold">👤 {user?.username || user?.email}</span>
-          <button onClick={logout} className="hover:underline border border-white rounded px-2 py-1 text-sm text-white">
+          <span className="font-semibold text-sm bg-white/20 px-3 py-1 rounded-full">{user?.username || user?.email}</span>
+          <button onClick={logout} className="btn-outline btn-small text-white border-white hover:bg-white hover:text-[#567158]">
             Logout
           </button>
         </>
@@ -297,10 +297,37 @@ function NavLinks({ t, isAuthenticated, user, logout }) {
 
 function LangSwitcher({ i18n }) {
   return (
-    <div className="space-x-2 text-xs">
-      <button onClick={() => i18n.changeLanguage("en")} className="hover:underline">EN</button>
-      <button onClick={() => i18n.changeLanguage("fr")} className="hover:underline">FR</button>
-      <button onClick={() => i18n.changeLanguage("ar")} className="hover:underline">AR</button>
+    <div className="flex gap-1">
+      <button 
+        onClick={() => i18n.changeLanguage("en")} 
+        className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-200 ${
+          i18n.language === 'en' 
+            ? 'bg-white text-[#567158] shadow-sm' 
+            : 'text-white hover:bg-white/20'
+        }`}
+      >
+        EN
+      </button>
+      <button 
+        onClick={() => i18n.changeLanguage("fr")} 
+        className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-200 ${
+          i18n.language === 'fr' 
+            ? 'bg-white text-[#567158] shadow-sm' 
+            : 'text-white hover:bg-white/20'
+        }`}
+      >
+        FR
+      </button>
+      <button 
+        onClick={() => i18n.changeLanguage("ar")} 
+        className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-200 ${
+          i18n.language === 'ar' 
+            ? 'bg-white text-[#567158] shadow-sm' 
+            : 'text-white hover:bg-white/20'
+        }`}
+      >
+        AR
+      </button>
     </div>
   );
 }

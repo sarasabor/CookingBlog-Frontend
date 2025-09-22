@@ -7,20 +7,29 @@ function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-green-700 mb-4">
+      <h1 className="text-4xl md:text-5xl font-bold text-[#567158] mb-6">
         {t("welcome")}
       </h1>
 
-      <p className="text-gray-700 text-lg max-w-xl mb-6">
+      <p className="text-gray-600 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
         {t("description")}
       </p>
 
-      <Link
-        to="/recipes"
-        className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition"
-      >
-        {t("browse")}
-      </Link>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Link
+          to="/recipes"
+          className="btn-primary btn-large"
+        >
+          {t("browse")}
+        </Link>
+        
+        <Link
+          to="/suggestions/mood"
+          className="btn-outline btn-large"
+        >
+          {t("moodSuggestions")}
+        </Link>
+      </div>
     </div>
   );
 }

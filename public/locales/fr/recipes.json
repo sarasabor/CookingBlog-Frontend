@@ -3,5 +3,17 @@
 "search": "Rechercher une recette...",
 "loading": "Chargement...",
 "noResults": "Aucune recette trouvée.",
-"page": "Page"
+"page": "Page",
+"filterByMood": "Filtrer par humeur",
+"searchRecipes": "Rechercher des recettes",
+"hungry": "Affamé",
+"sad": "Triste", 
+"stressed": "Stressé",
+"tired": "Fatigué",
+"relaxed": "Détendu",
+"happy": "Heureux",
+"bored": "Ennuyé",
+"romantic": "Romantique",
+"anxious": "Anxieux",
+"energetic": "Énergique"
 }

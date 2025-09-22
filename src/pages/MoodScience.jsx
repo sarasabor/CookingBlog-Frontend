@@ -2,34 +2,90 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 function MoodScience() {
-  const { t } = useTranslation("moodScience");
+  const { t, i18n } = useTranslation("moodScience");
+  const isRTL = i18n.language === 'ar';
 
   return (
-    <section className="max-w-5xl mx-auto px-4 py-16 text-gray-800 animate-fade-in" id="why-mood-suggestions">
-      <h2 className="text-3xl font-bold text-[#2d4032] mb-6 text-center">🧠🌿 {t("title")}</h2>
+    <section 
+      className={`max-w-5xl mx-auto px-4 py-16 text-gray-800 animate-fade-in ${isRTL ? 'rtl' : 'ltr'}`} 
+      id="why-mood-suggestions"
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h2 className={`text-3xl font-bold text-[#567158] mb-8 text-center`}>
+          <span className="text-2xl mr-2">🧠</span>
+          {t("title")}
+        </h2>
 
-      <p className="mb-4 leading-relaxed">{t("intro")}</p>
-      <p className="mb-4 leading-relaxed">{t("science")}</p>
-      <p className="mb-4 leading-relaxed">{t("lightMood")}</p>
-      <p className="mb-4 leading-relaxed">{t("studies")}</p>
+        <div className={`space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <p className="text-lg leading-relaxed text-gray-700">{t("intro")}</p>
+          <p className="leading-relaxed text-gray-700">{t("science")}</p>
+          <p className="leading-relaxed text-gray-700">{t("lightMood")}</p>
+          <p className="leading-relaxed text-gray-700">{t("studies")}</p>
+        </div>
 
-      <h3 className="text-xl font-semibold text-[#2d4032] mb-3">🍽️ {t("howItWorks")}</h3>
-      <p className="mb-4 leading-relaxed">{t("explanation")}</p>
+        <div className="mt-8">
+          <h3 className={`text-xl font-semibold text-[#567158] mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <span className="text-2xl mr-2">🍽️</span>
+            {t("howItWorks")}
+          </h3>
+          <p className={`mb-6 leading-relaxed text-gray-700 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t("explanation")}
+          </p>
+        </div>
 
-      <ul className="list-disc list-inside space-y-2 mb-6">
-        <li>{t("hungry")}</li>
-        <li>{t("sad")}</li>
-        <li>{t("stressed")}</li>
-        <li>{t("tired")}</li>
-        <li>{t("relaxed")}</li>
-        <li>{t("happy")}</li>
-        <li>{t("bored")}</li>
-        <li>{t("anxious")}</li>
-        <li>{t("energetic")}</li>
-        <li>{t("romantic")}</li>
-      </ul>
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded text-sm">
-        📌 <strong>{t("notePrefix")}</strong> {t("notes")}
+        <ul className={`grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">🍽️</span>
+            <span>{t("hungry")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😢</span>
+            <span>{t("sad")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😰</span>
+            <span>{t("stressed")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😴</span>
+            <span>{t("tired")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😌</span>
+            <span>{t("relaxed")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😊</span>
+            <span>{t("happy")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😑</span>
+            <span>{t("bored")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">😟</span>
+            <span>{t("anxious")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">⚡</span>
+            <span>{t("energetic")}</span>
+          </li>
+          <li className={`flex items-center gap-3 bg-gray-50 p-3 rounded-lg ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-lg">💕</span>
+            <span>{t("romantic")}</span>
+          </li>
+        </ul>
+        
+        <div className={`bg-yellow-50 p-6 rounded-xl shadow-sm ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <span className="text-2xl">💡</span>
+            <div>
+              <strong className="text-yellow-800 font-semibold">{t("notePrefix")}</strong>
+              <p className="text-yellow-700 mt-1">{t("notes")}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

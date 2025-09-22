@@ -65,7 +65,7 @@ return (
 
     <button
       type="submit"
-      className="w-full bg-[#567158] text-white py-2 rounded-lg hover:bg-[#3f5744] transition"
+      className="w-full btn-primary"
     >
       {t("submit")}
     </button>

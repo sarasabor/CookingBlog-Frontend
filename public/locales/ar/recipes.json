@@ -3,5 +3,17 @@
 "search": "ابحث عن وصفة...",
 "loading": "جاري التحميل...",
 "noResults": "لم يتم العثور على وصفات.",
-"page": "الصفحة"
+"page": "الصفحة",
+"filterByMood": "تصفية حسب المزاج",
+"searchRecipes": "البحث في الوصفات",
+"hungry": "جائع",
+"sad": "حزين",
+"stressed": "متوتر",
+"tired": "متعب",
+"relaxed": "مسترخي", 
+"happy": "سعيد",
+"bored": "ملل",
+"romantic": "رومانسي",
+"anxious": "قلق",
+"energetic": "نشيط"
 }

@@ -53,7 +53,7 @@ function RecipeCard({ recipe, hideFavoriteButton = false }) {
   return (
     <div
       onClick={handleCardClick}
-      className="cursor-pointer bg-white  rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-transform duration-200 hover:scale-105"
+      className="cursor-pointer bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-transform duration-200 hover:scale-105"
     >
       <img
         src={imageSrc}
@@ -67,25 +67,41 @@ function RecipeCard({ recipe, hideFavoriteButton = false }) {
         </h3>
 
         <p className="text-sm text-gray-500 mt-1 mb-1">
-          🧠 <span className="capitalize">{t(`moods.${recipe.mood}`)}</span>
+          <span className="capitalize font-medium">{t(`moods.${recipe.mood}`)}</span>
         </p>
 
         <p className="text-sm text-gray-500 mb-1">
-          🕒 {recipe.cookTime} {t("minutes")} · 🎯 {t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}
+          <span className="font-medium">{recipe.cookTime} {t("minutes")}</span> · <span className="capitalize">{t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}</span>
         </p>
 
         <p className="text-sm text-gray-500 mb-2 truncate">
-          🏷️ {recipe.tags?.length ? recipe.tags.join(", ") : t("noTags")}
+          {recipe.tags?.length ? recipe.tags.join(", ") : t("noTags")}
         </p>
 
         <div className="flex justify-end">
           {!hideFavoriteButton && (
             <button
               onClick={handleFavoriteClick}
-              className="text-lg"
+              className={`p-2 rounded-full transition-colors ${
+                isFavorite 
+                  ? 'text-red-500 hover:bg-red-50' 
+                  : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+              }`}
               title={isFavorite ? t("unsave") : t("save")}
             >
-              {isFavorite ? "❤️" : "💾"}
+              <svg 
+                className="w-5 h-5" 
+                fill={isFavorite ? "currentColor" : "none"} 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
+                />
+              </svg>
             </button>
           )}
         </div>

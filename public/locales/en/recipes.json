@@ -3,5 +3,17 @@
 "search": "Search for a recipe...",
 "loading": "Loading...",
 "noResults": "No recipes found.",
-"page": "Page"
+"page": "Page",
+"filterByMood": "Filter by mood",
+"searchRecipes": "Search recipes",
+"hungry": "Hungry",
+"sad": "Sad",
+"stressed": "Stressed", 
+"tired": "Tired",
+"relaxed": "Relaxed",
+"happy": "Happy",
+"bored": "Bored",
+"romantic": "Romantic",
+"anxious": "Anxious",
+"energetic": "Energetic"
 }

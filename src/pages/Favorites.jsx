@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import api from "../services/api";
 import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
+import RecipeCardSkeleton from "../components/RecipeCardSkeleton";
 
 function Favorites() {
   const { t } = useTranslation("favorites");
@@ -12,6 +14,7 @@ function Favorites() {
   const [moodFilter, setMoodFilter] = useState("all");
   const [timeFilter, setTimeFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const moodOptions = t("moods", { returnObjects: true });
   const timeOptions = t("timeFilters", { returnObjects: true });
@@ -19,6 +22,7 @@ function Favorites() {
   const navigate = useNavigate();
 
   const fetchFavorites = async () => {
+    setLoading(true);
     try {
       const res = await api.get("/users/favorites");
       const data = Array.isArray(res.data) ? res.data : [];
@@ -28,6 +32,8 @@ function Favorites() {
       console.error("Error fetching favorites from server:", err);
       setRecipes([]);
       setFiltered([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,56 +79,105 @@ function Favorites() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-[#2d4032] mb-6 text-center">
+      <h1 className="text-3xl font-bold text-[#567158] mb-8 text-center">
         {t("title")}
       </h1>
 
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-        <input
-          type="text"
-          placeholder={t("searchPlaceholder")}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border rounded-lg shadow w-full md:w-1/3"
-        />
-        <div className="flex gap-4">
-          <select
-            value={moodFilter}
-            onChange={(e) => setMoodFilter(e.target.value)}
-            className="px-3 py-2 border rounded-lg shadow"
-          >
-            {Array.isArray(moodOptions) &&
-              moodOptions.map(({ key, label }) => (
-                <option key={key} value={key}>
-                  {label}
-                </option>
-              ))}
-          </select>
+      {/* Filters Section */}
+      <div className="bg-white p-6 rounded-xl shadow-lg mb-8 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Search */}
+          <div className="md:col-span-1">
+            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("search")}</label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder={t("searchPlaceholder")}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-gray-50 rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 shadow-sm"
+              />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+          </div>
 
-          <select
-            value={timeFilter}
-            onChange={(e) => setTimeFilter(e.target.value)}
-            className="px-3 py-2 border rounded-lg shadow"
-          >
-            {Array.isArray(timeOptions) &&
-              timeOptions.map(({ key, label }) => (
-                <option key={key} value={key}>
-                  {label}
-                </option>
-              ))}
-          </select>
+          {/* Mood Filter */}
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("mood")}</label>
+            <div className="relative">
+              <select
+                value={moodFilter}
+                onChange={(e) => setMoodFilter(e.target.value)}
+                className="w-full appearance-none bg-gray-50 rounded-xl p-3 pr-12 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 font-medium shadow-sm"
+              >
+                {Array.isArray(moodOptions) &&
+                  moodOptions.map(({ key, label }) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Time Filter */}
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("time")}</label>
+            <div className="relative">
+              <select
+                value={timeFilter}
+                onChange={(e) => setTimeFilter(e.target.value)}
+                className="w-full appearance-none bg-gray-50 rounded-xl p-3 pr-12 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 font-medium shadow-sm"
+              >
+                {Array.isArray(timeOptions) &&
+                  timeOptions.map(({ key, label }) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {filtered.length === 0 ? (
-        <p className="text-center text-gray-500 mt-20">{t("noResults")}</p>
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <RecipeCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-16">
+          <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+            <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <p className="text-gray-500 text-lg font-medium">{t("noResults")}</p>
+          <p className="text-gray-400 text-sm mt-2">Ajoutez des recettes à vos favoris pour les voir ici</p>
+        </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((recipe) => (
             <div
               key={recipe._id}
               onClick={() => navigate(`/recipes/${recipe._id}`)}
-              className="relative cursor-pointer bg-white border rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-transform duration-200 hover:scale-105 group"
+              className="relative cursor-pointer bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-transform duration-200 hover:scale-105 group"
             >
               <RecipeCard recipe={recipe} hideFavoriteButton />
 
@@ -131,7 +186,7 @@ function Favorites() {
                   e.stopPropagation(); 
                   removeFromFavorites(recipe._id);
                 }}
-                className="absolute top-3 left-3 group bg-white text-red-500 border border-red-300 hover:bg-red-500 hover:text-white hover:border-red-500 rounded-full p-2 shadow transition-all duration-200"
+                className="absolute top-3 left-3 group bg-white text-red-500 hover:bg-red-500 hover:text-white rounded-full p-2 shadow-lg transition-all duration-200"
                 title={t("remove")}
               >
                 <Trash2 className="w-4 h-4" />

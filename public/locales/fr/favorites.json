@@ -27,7 +27,8 @@
   { "key": "short", "label": "Court (≤ 15 min)" },
   { "key": "medium", "label": "Moyen (15–45 min)" },
   { "key": "long", "label": "Long (> 45 min)" }
-]
+],
+"search": "Rechercher",
+"mood": "Humeur",
+"time": "Temps"
 }
-
-
