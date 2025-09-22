@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import RecipeCard from "../context/components/RecipeCard";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -16,14 +16,11 @@ function MoodSuggestions() {
 
     setLoading(true);
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/recipes/mood/${mood}`,
-        {
-          headers: {
-            "Accept-Language": i18n.language, 
-          },
-        }
-      );
+      const res = await api.get(`/recipes/mood/${mood}`, {
+        headers: {
+          "Accept-Language": i18n.language, 
+        },
+      });
       setRecipes(res.data);
     } catch (err) {
       console.error("Error fetching mood suggestions:", err);

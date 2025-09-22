@@ -9,7 +9,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 function Layout() {
   const { t, i18n } = useTranslation("layout");
-  const { user, logout, isAuthenticated, isLoading } = useContext(AuthContext);
+  const { user, logout, isAuthenticated } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);

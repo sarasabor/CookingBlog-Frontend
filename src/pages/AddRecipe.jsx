@@ -9,16 +9,6 @@ function AddRecipe() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  if (!user || user.role !== "admin") {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <p className="text-red-500 text-lg font-semibold text-center">
-          {t("errors.unauthorized") || "Access denied. Admins only."}
-        </p>
-      </div>
-    );
-  }
-
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -35,6 +25,16 @@ function AddRecipe() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  if (!user || user.role !== "admin") {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <p className="text-red-500 text-lg font-semibold text-center">
+          {t("errors.unauthorized") || "Access denied. Admins only."}
+        </p>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -57,7 +57,8 @@ function AddRecipe() {
     formData.append("ingredients", JSON.stringify(ingredients));
 
     try {
-      await axios.post("http://localhost:5000/api/recipes", formData, {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      await axios.post(`${API_URL}/recipes`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });

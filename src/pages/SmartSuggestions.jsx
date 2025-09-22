@@ -181,7 +181,7 @@
 // export default SmartSuggestions;
 
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -222,8 +222,9 @@ function SmartSuggestions() {
 
     setLoading(true);
 
-    // ✅ Debug: عرض القيم قبل الإرسال
+    // ✅ Debug: API URL check
     console.log("🔥 Form Submitted");
+    console.log("API URL:", import.meta.env.VITE_API_URL);
     console.log("Payload:", {
       mood,
       ingredients: selectedIngredients,
@@ -233,21 +234,17 @@ function SmartSuggestions() {
     });
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/recipes/smart-suggestions",
-        {
-          mood: mood || undefined,
-          ingredients: selectedIngredients,
-          servings,
-          maxCookTime: maxCookTime ? parseInt(maxCookTime) : undefined,
-          minRating: minRating ? parseFloat(minRating) : undefined,
+      const res = await api.post("/recipes/smart-suggestions", {
+        mood: mood || undefined,
+        ingredients: selectedIngredients,
+        servings,
+        maxCookTime: maxCookTime ? parseInt(maxCookTime) : undefined,
+        minRating: minRating ? parseFloat(minRating) : undefined,
+      }, {
+        headers: {
+          "Accept-Language": lang,
         },
-        {
-          headers: {
-            "Accept-Language": lang,
-          },
-        }
-      );
+      });
 
       setRecipes(res.data);
     } catch (err) {
