@@ -245,7 +245,7 @@ function AnimatedLinks({ t, isAuthenticated, user, logout, closeSidebar }) {
           <motion.div variants={linkVariants}>
             <button
               onClick={logout}
-              className="hover:underline border border-white rounded px-2 py-1 text-sm text-white"
+              className=" border border-transparent rounded px-2 py-1 text-sm text-white"
             >
               Logout
             </button>
