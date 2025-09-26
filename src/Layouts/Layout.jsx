@@ -286,7 +286,7 @@ function NavLinks({ t, isAuthenticated, user, logout }) {
       {isAuthenticated && (
         <>
           <span className="font-semibold text-sm bg-white/20 px-3 py-1 rounded-full">{user?.username || user?.email}</span>
-          <button onClick={logout} className="btn-outline btn-small text-white border-white hover:bg-white hover:text-[#567158]">
+          <button onClick={logout} className="btn-outline btn-small text-white border-white hover:bg-white">
             Logout
           </button>
         </>
