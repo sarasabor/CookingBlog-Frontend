@@ -245,7 +245,7 @@ function AnimatedLinks({ t, isAuthenticated, user, logout, closeSidebar }) {
           <motion.div variants={linkVariants}>
             <button
               onClick={logout}
-              className=" border border-transparent rounded px-2 py-1 text-sm text-white"
+              className="border border-[#fdfcf8] rounded px-3 py-1 text-sm text-[#fdfcf8] bg-transparent hover:bg-[#fdfcf8] hover:text-[#567158] transition-all duration-200"
             >
               Logout
             </button>
@@ -286,7 +286,7 @@ function NavLinks({ t, isAuthenticated, user, logout }) {
       {isAuthenticated && (
         <>
           <span className="font-semibold text-sm bg-white/20 px-3 py-1 rounded-full">{user?.username || user?.email}</span>
-          <button onClick={logout} className="btn-outline btn-small text-white border-white hover:bg-white">
+          <button onClick={logout} className="border border-[#fdfcf8] rounded px-3 py-1 text-sm text-[#fdfcf8] bg-transparent hover:bg-[#fdfcf8] hover:text-[#567158] transition-all duration-200">
             Logout
           </button>
         </>
