@@ -1,0 +1,14 @@
+{
+  "name": "cooking-blog",
+  "version": "1.0.0",
+  "description": "Cooking Blog Full Stack Application",
+  "scripts": {
+    "build": "cd cookingBlog-frontend && npm run build",
+    "dev": "cd cookingBlog-frontend && npm run dev",
+    "install": "cd cookingBlog-frontend && npm install"
+  },
+  "workspaces": [
+    "cookingBlog-frontend",
+    "Api"
+  ]
+}
