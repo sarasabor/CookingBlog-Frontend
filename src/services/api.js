@@ -36,7 +36,7 @@ api.interceptors.response.use(
   }
 );
 
-export const getAllRecipes = () => api.get('/recipes');
+export const getAllRecipes = (params = {}) => api.get('/recipes', { params });
 export const getRecipeById = (id) => api.get(`/recipes/${id}`);
 export const createRecipe = (recipeData) => api.post('/recipes', recipeData);
 export const updateRecipe = (id, recipeData) => api.put(`/recipes/${id}`, recipeData);
