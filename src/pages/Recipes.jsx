@@ -39,16 +39,16 @@ function Recipes() {
   }, [page, search, selectedMood]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="px-4 py-8 mx-auto max-w-7xl">
       <h1 className="text-3xl font-bold text-[#567158] mb-8 text-center">
         {t("title")}
       </h1>
 
       {/* Filters Section */}
-      <div className="bg-white p-6 rounded-xl shadow-lg mb-8 space-y-6">
+      <div className="p-6 mb-8 space-y-6 bg-white shadow-lg rounded-xl">
         {/* Mood Filter */}
         <div>
-          <label className="block mb-3 text-sm font-semibold text-gray-700 uppercase tracking-wide text-center">
+          <label className="block mb-3 text-sm font-semibold tracking-wide text-center text-gray-700 uppercase">
             {t("filterByMood")}
           </label>
           <div className="flex flex-wrap justify-center gap-2">
@@ -59,7 +59,7 @@ function Recipes() {
                   setSelectedMood(mood === selectedMood ? "" : mood);
                   setPage(1);
                 }}
-                className={`px-4 py-2 rounded-xl text-sm capitalize font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-xl text-sm cservices/apitalize font-medium transition-all duration-200 ${
                   selectedMood === mood
                     ? "bg-[#567158] text-white shadow-md"
                     : "bg-gray-100 hover:bg-gray-200 text-gray-700 hover:shadow-sm"
@@ -73,7 +73,7 @@ function Recipes() {
 
         {/* Search */}
         <div>
-          <label className="block mb-3 text-sm font-semibold text-gray-700 uppercase tracking-wide text-center">
+          <label className="block mb-3 text-sm font-semibold tracking-wide text-center text-gray-700 uppercase">
             {t("searchRecipes")}
           </label>
           <div className="flex justify-center">
@@ -99,30 +99,30 @@ function Recipes() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <RecipeCardSkeleton key={index} />
           ))}
         </div>
       ) : recipes.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+        <div className="py-12 text-center">
+          <div className="flex items-center justify-center w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full">
             <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <p className="text-gray-500 text-lg font-medium">{t("noResults")}</p>
-          <p className="text-gray-400 text-sm mt-2">Essayez de modifier vos critères de recherche</p>
+          <p className="text-lg font-medium text-gray-500">{t("noResults")}</p>
+          <p className="mt-2 text-sm text-gray-400">Essayez de modifier vos critères de recherche</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {recipes.map((recipe) => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
         </div>
       )}
   
-      <div className="mt-10 flex flex-wrap justify-center gap-2">
+      <div className="flex flex-wrap justify-center gap-2 mt-10">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}

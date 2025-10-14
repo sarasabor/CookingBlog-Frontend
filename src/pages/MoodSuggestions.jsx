@@ -16,7 +16,7 @@ function MoodSuggestions() {
 
     setLoading(true);
     try {
-      const res = await api.get(`/recipes/mood/${mood}`, {
+      const res = await services/api.get(`/recipes/mood/${mood}`, {
         headers: {
           "Accept-Language": i18n.language, 
         },

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../api";
-import { AuthContext } from "../../context/AuthContext";
+import api from "../../services/api";
+import { AuthProvider } from "../../context/AuthProvider";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -15,7 +15,7 @@ function RecipeCard({ recipe, hideFavoriteButton = false }) {
   const navigate = useNavigate();
 
   const imageSrc = recipe.image || "https://via.placeholder.com/400x200?text=No+Image";
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthProvider);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {

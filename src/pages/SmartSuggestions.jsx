@@ -35,7 +35,7 @@
 //     setLoading(true);
 //     try {
 //       const res = await axios.post(
-//         "http://localhost:5000/api/recipes/smart-suggestions",
+//         "http://localhost:5000/services/api/recipes/smart-suggestions",
 //         {
 //           mood: mood || undefined,
 //           ingredients: selectedIngredients,
@@ -254,7 +254,7 @@ function SmartSuggestions() {
     });
 
     try {
-      const res = await api.post("/recipes/smart-suggestions", {
+      const res = await services/api.post("/recipes/smart-suggestions", {
         mood: mood || undefined,
         ingredients: selectedIngredients,
         servings,

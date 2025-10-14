@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from './AuthProvider'
+import { useAuth } from '../AuthProvider'
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
@@ -17,3 +17,4 @@ const ProtectedRoute = ({ children }) => {
 }
 
 export default ProtectedRoute
+

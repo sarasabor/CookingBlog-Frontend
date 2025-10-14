@@ -24,7 +24,7 @@ function Favorites() {
   const fetchFavorites = async () => {
     setLoading(true);
     try {
-      const res = await api.get("/users/favorites");
+      const res = await services/api.get("/users/favorites");
       const data = Array.isArray(res.data) ? res.data : [];
       setRecipes(data);
       setFiltered(data);
@@ -39,7 +39,7 @@ function Favorites() {
 
   const removeFromFavorites = async (recipeId) => {
     try {
-      await api.delete(`/users/favorites/${recipeId}`);
+      await services/api.delete(`/users/favorites/${recipeId}`);
       const updated = recipes.filter((r) => r._id !== recipeId);
       setRecipes(updated);
       setFiltered(updated);

@@ -2,13 +2,13 @@
 // import { useParams } from "react-router-dom";
 // import api from "../services/api";
 // import { useTranslation } from "react-i18next";
-// import { AuthContext } from "../context/AuthContext";
+// import { AuthProvider } from "../context/AuthProvider";
 
 // function RecipeDetails() {
 //   const { t, i18n } = useTranslation("recipeDetails");
 //   const currentLang = i18n.language;
 //   const { id } = useParams();
-//   const { user } = useContext(AuthContext);
+//   const { user } = useContext(AuthProvider);
 
 //   const [recipe, setRecipe] = useState(null);
 //   const [loading, setLoading] = useState(true);
@@ -19,10 +19,10 @@
 //   useEffect(() => {
 //     const fetchRecipeDetails = async () => {
 //       try {
-//         const res = await api.get(`/recipes/with-reviews/${id}`);
+//         const res = await services/api.get(`/recipes/with-reviews/${id}`);
 //         setRecipe(res.data);
 //       } catch (err) {
-//         console.error("❌", t("apiError"), err);
+//         console.error("❌", t("services/apiError"), err);
 //       } finally {
 //         setLoading(false);
 //       }
@@ -37,13 +37,13 @@
 
 //     try {
 //       setSubmitting(true);
-//       await api.post(`/reviews/${id}`, {
+//       await services/api.post(`/reviews/${id}`, {
 //         rating: newRating,
 //         comment: newComment,
 //       });
 //       setNewRating(0);
 //       setNewComment("");
-//       const res = await api.get(`/recipes/with-reviews/${id}`);
+//       const res = await services/api.get(`/recipes/with-reviews/${id}`);
 //       setRecipe(res.data);
 //     } catch (err) {
 //       console.error("❌ Error submitting rating:", err.response?.data || err);
@@ -169,13 +169,13 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useTranslation } from "react-i18next";
-import { AuthContext } from "../context/AuthContext";
+import { AuthProvider } from "../context/AuthProvider";
 
 function RecipeDetails() {
   const { t, i18n } = useTranslation("recipeDetails");
   const lang = i18n.language.slice(0, 2); // ✅ دعم en, fr, ar فقط
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthProvider);
 
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -186,10 +186,10 @@ function RecipeDetails() {
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try {
-        const res = await api.get(`/recipes/with-reviews/${id}`);
+        const res = await services/api.get(`/recipes/with-reviews/${id}`);
         setRecipe(res.data);
       } catch (err) {
-        console.error("❌", t("apiError"), err);
+        console.error("❌", t("services/apiError"), err);
       } finally {
         setLoading(false);
       }
@@ -204,13 +204,13 @@ function RecipeDetails() {
 
     try {
       setSubmitting(true);
-      await api.post(`/reviews/${id}`, {
+      await services/api.post(`/reviews/${id}`, {
         rating: newRating,
         comment: newComment,
       });
       setNewRating(0);
       setNewComment("");
-      const res = await api.get(`/recipes/with-reviews/${id}`);
+      const res = await services/api.get(`/recipes/with-reviews/${id}`);
       setRecipe(res.data);
     } catch (err) {
       console.error("❌ Error submitting rating:", err.response?.data || err);
@@ -256,7 +256,7 @@ function RecipeDetails() {
               <span className="text-2xl">🎭</span>
               <div>
                 <p className="text-xs font-semibold text-gray-500 uppercase">Humeur</p>
-                <p className="font-medium text-gray-800 capitalize">{t(`moods.${recipe.mood}`)}</p>
+                <p className="font-medium text-gray-800 cservices/apitalize">{t(`moods.${recipe.mood}`)}</p>
               </div>
             </div>
             
@@ -272,7 +272,7 @@ function RecipeDetails() {
               <span className="text-2xl">📊</span>
               <div>
                 <p className="text-xs font-semibold text-gray-500 uppercase">Difficulté</p>
-                <p className="font-medium text-gray-800 capitalize">{t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}</p>
+                <p className="font-medium text-gray-800 cservices/apitalize">{t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}</p>
               </div>
             </div>
           </div>
