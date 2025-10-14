@@ -25,12 +25,23 @@ function Recipes() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await getAllRecipes({ page, search, mood: selectedMood });
+        const response = await getAllRecipes({ page, search, mood: selectedMood });
+        const data = response.data;
 
-        setRecipes(data.recipes);
-        setTotalPages(data.totalPages);
+        console.log("API Response:", data); // Debug log
+
+        if (data && data.recipes) {
+          setRecipes(data.recipes);
+          setTotalPages(data.totalPages || 1);
+        } else {
+          console.warn("No recipes data received:", data);
+          setRecipes([]);
+          setTotalPages(1);
+        }
       } catch (err) {
         console.error("Error fetching recipes:", err);
+        setRecipes([]);
+        setTotalPages(1);
       } finally {
         setLoading(false);
       }
@@ -104,7 +115,7 @@ function Recipes() {
             <RecipeCardSkeleton key={index} />
           ))}
         </div>
-      ) : recipes.length === 0 ? (
+      ) : !recipes || recipes.length === 0 ? (
         <div className="py-12 text-center">
           <div className="flex items-center justify-center w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full">
             <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,7 +127,7 @@ function Recipes() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {recipes.map((recipe) => (
+          {recipes && recipes.map((recipe) => (
             <RecipeCard key={recipe._id} recipe={recipe} />
           ))}
         </div>
