@@ -1,0 +1,20 @@
+{
+  "title": "Register",
+  "subtitle": "Create your account",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "register": "Register",
+  "hasAccount": "Already have an account?",
+  "login": "Login here",
+  "error": "Registration failed. Please try again.",
+  "success": "Registration successful!",
+  "usernamePlaceholder": "Choose a username",
+  "emailPlaceholder": "Enter your email",
+  "passwordPlaceholder": "Create a password",
+  "confirmPasswordPlaceholder": "Confirm your password",
+  "passwordMismatch": "Passwords do not match",
+  "usernameExists": "Username already exists",
+  "emailExists": "Email already exists"
+}

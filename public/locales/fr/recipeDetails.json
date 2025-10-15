@@ -1,0 +1,42 @@
+{
+  "title": "Détails de la Recette",
+  "backToRecipes": "Retour aux Recettes",
+  "cookTime": "Temps de Cuisson",
+  "minutes": "minutes",
+  "difficulty": "Difficulté",
+  "servings": "Portions",
+  "ingredients": "Ingrédients",
+  "instructions": "Instructions",
+  "rating": "Note",
+  "rateRecipe": "Noter cette Recette",
+  "yourRating": "Votre Note",
+  "submitRating": "Soumettre la Note",
+  "reviews": "Avis",
+  "noReviews": "Aucun avis pour le moment",
+  "addReview": "Ajouter un Avis",
+  "reviewText": "Écrivez votre avis...",
+  "submitReview": "Soumettre l'Avis",
+  "save": "Sauvegarder",
+  "unsave": "Retirer",
+  "loginToRate": "Veuillez vous connecter pour noter les recettes",
+  "loginToReview": "Veuillez vous connecter pour ajouter des avis",
+  "unknown": "Inconnu",
+  "moods": {
+    "hungry": "Affamé",
+    "sad": "Triste",
+    "stressed": "Stressé",
+    "tired": "Fatigué",
+    "relaxed": "Détendu",
+    "happy": "Heureux",
+    "bored": "Ennuyé",
+    "romantic": "Romantique",
+    "anxious": "Anxieux",
+    "energetic": "Énergique"
+  },
+  "difficultyLevels": {
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile"
+  },
+  "noTags": "Aucun tag"
+}

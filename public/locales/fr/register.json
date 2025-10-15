@@ -1,0 +1,20 @@
+{
+  "title": "Inscription",
+  "subtitle": "Créez votre compte",
+  "username": "Nom d'utilisateur",
+  "email": "Email",
+  "password": "Mot de passe",
+  "confirmPassword": "Confirmer le mot de passe",
+  "register": "S'inscrire",
+  "hasAccount": "Vous avez déjà un compte ?",
+  "login": "Connectez-vous ici",
+  "error": "Échec de l'inscription. Veuillez réessayer.",
+  "success": "Inscription réussie !",
+  "usernamePlaceholder": "Choisissez un nom d'utilisateur",
+  "emailPlaceholder": "Entrez votre email",
+  "passwordPlaceholder": "Créez un mot de passe",
+  "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+  "passwordMismatch": "Les mots de passe ne correspondent pas",
+  "usernameExists": "Le nom d'utilisateur existe déjà",
+  "emailExists": "L'email existe déjà"
+}

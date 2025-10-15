@@ -1,0 +1,15 @@
+{
+  "title": "Connexion",
+  "subtitle": "Connectez-vous à votre compte",
+  "email": "Email",
+  "password": "Mot de passe",
+  "login": "Se connecter",
+  "noAccount": "Vous n'avez pas de compte ?",
+  "register": "Inscrivez-vous ici",
+  "forgotPassword": "Mot de passe oublié ?",
+  "rememberMe": "Se souvenir de moi",
+  "error": "Échec de la connexion. Vérifiez vos identifiants.",
+  "success": "Connexion réussie !",
+  "emailPlaceholder": "Entrez votre email",
+  "passwordPlaceholder": "Entrez votre mot de passe"
+}

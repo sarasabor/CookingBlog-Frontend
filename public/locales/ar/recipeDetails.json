@@ -1,0 +1,42 @@
+{
+  "title": "تفاصيل الوصفة",
+  "backToRecipes": "العودة إلى الوصفات",
+  "cookTime": "وقت الطهي",
+  "minutes": "دقائق",
+  "difficulty": "الصعوبة",
+  "servings": "العدد",
+  "ingredients": "المكونات",
+  "instructions": "التعليمات",
+  "rating": "التقييم",
+  "rateRecipe": "قيم هذه الوصفة",
+  "yourRating": "تقييمك",
+  "submitRating": "إرسال التقييم",
+  "reviews": "المراجعات",
+  "noReviews": "لا توجد مراجعات بعد",
+  "addReview": "إضافة مراجعة",
+  "reviewText": "اكتب مراجعتك...",
+  "submitReview": "إرسال المراجعة",
+  "save": "حفظ",
+  "unsave": "إلغاء الحفظ",
+  "loginToRate": "يرجى تسجيل الدخول لتقييم الوصفات",
+  "loginToReview": "يرجى تسجيل الدخول لإضافة مراجعات",
+  "unknown": "غير معروف",
+  "moods": {
+    "hungry": "جائع",
+    "sad": "حزين",
+    "stressed": "متوتر",
+    "tired": "متعب",
+    "relaxed": "مسترخي",
+    "happy": "سعيد",
+    "bored": "ملول",
+    "romantic": "رومانسي",
+    "anxious": "قلق",
+    "energetic": "نشيط"
+  },
+  "difficultyLevels": {
+    "easy": "سهل",
+    "medium": "متوسط",
+    "hard": "صعب"
+  },
+  "noTags": "لا توجد علامات"
+}
