@@ -316,7 +316,7 @@ function SmartSuggestions() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Rechercher un ingrédient..."
+                placeholder={t("searchIngredients")}
                 value={ingredientSearch}
                 onChange={(e) => setIngredientSearch(e.target.value)}
                 className="w-full bg-gray-50 rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 shadow-sm"
@@ -332,14 +332,14 @@ function SmartSuggestions() {
             {selectedIngredients.length > 0 && (
               <div className="mt-4 flex items-center justify-between bg-[#567158]/10 rounded-lg p-3">
                 <span className="text-sm font-medium text-[#567158]">
-                  {selectedIngredients.length} ingrédient(s) sélectionné(s)
+                  {t("ingredientsSelected", { count: selectedIngredients.length })}
                 </span>
                 <button
                   type="button"
                   onClick={() => setSelectedIngredients([])}
                   className="text-sm text-red-600 hover:text-red-800 font-medium transition-colors"
                 >
-                  Tout effacer
+                  {t("clearAll")}
                 </button>
               </div>
             )}
@@ -353,8 +353,8 @@ function SmartSuggestions() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
-                <p className="text-gray-500 font-medium">Aucun ingrédient trouvé</p>
-                <p className="text-gray-400 text-sm mt-1">Essayez un autre terme de recherche</p>
+                <p className="text-gray-500 font-medium">{t("noIngredientsFound")}</p>
+                <p className="text-gray-400 text-sm mt-1">{t("tryAnotherSearch")}</p>
               </div>
             ) : (
               Object.entries(filteredIngredientsByCategory).map(([categoryKey, ingredients]) => (
@@ -419,7 +419,7 @@ function SmartSuggestions() {
               value={maxCookTime}
               onChange={(e) => setMaxCookTime(e.target.value)}
               className="w-full bg-gray-50 rounded-xl p-4 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#567158]/20 transition-all duration-200 text-gray-700 font-medium shadow-sm"
-              placeholder="30 min"
+              placeholder="30"
             />
           </div>
 
