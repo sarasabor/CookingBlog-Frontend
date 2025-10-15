@@ -254,7 +254,7 @@ function SmartSuggestions() {
     });
 
     try {
-      const res = await services/api.post("/recipes/smart-suggestions", {
+      const res = await api.post("/recipes/smart-suggestions", {
         mood: mood || undefined,
         ingredients: selectedIngredients,
         servings,

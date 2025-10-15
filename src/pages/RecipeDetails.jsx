@@ -19,7 +19,7 @@
 //   useEffect(() => {
 //     const fetchRecipeDetails = async () => {
 //       try {
-//         const res = await services/api.get(`/recipes/with-reviews/${id}`);
+//         const res = await api.get(`/recipes/with-reviews/${id}`);
 //         setRecipe(res.data);
 //       } catch (err) {
 //         console.error("❌", t("services/apiError"), err);
@@ -37,7 +37,7 @@
 
 //     try {
 //       setSubmitting(true);
-//       await services/api.post(`/reviews/${id}`, {
+//       await api.post(`/reviews/${id}`, {
 //         rating: newRating,
 //         comment: newComment,
 //       });
@@ -186,7 +186,7 @@ function RecipeDetails() {
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try {
-        const res = await services/api.get(`/recipes/with-reviews/${id}`);
+        const res = await api.get(`/recipes/with-reviews/${id}`);
         setRecipe(res.data);
       } catch (err) {
         console.error("❌", t("services/apiError"), err);
@@ -204,7 +204,7 @@ function RecipeDetails() {
 
     try {
       setSubmitting(true);
-      await services/api.post(`/reviews/${id}`, {
+      await api.post(`/reviews/${id}`, {
         rating: newRating,
         comment: newComment,
       });
