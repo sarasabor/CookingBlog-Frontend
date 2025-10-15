@@ -24,10 +24,24 @@ function Home() {
         </Link>
         
         <Link
-          to="/suggestions/mood"
+          to="/mood-suggestions"
           className="btn-outline btn-large"
         >
           {t("moodSuggestions")}
+        </Link>
+        
+        <Link
+          to="/smart-suggestions"
+          className="btn-outline btn-large"
+        >
+          Smart Search
+        </Link>
+        
+        <Link
+          to="/mood-science"
+          className="btn-outline btn-large"
+        >
+          Science
         </Link>
       </div>
     </div>

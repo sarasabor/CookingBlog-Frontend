@@ -19,6 +19,15 @@ const Header = () => {
             <Link to="/recipes" className="text-gray-600 hover:text-gray-900">
               Recipes
             </Link>
+            <Link to="/mood-suggestions" className="text-gray-600 hover:text-gray-900">
+              By Mood
+            </Link>
+            <Link to="/smart-suggestions" className="text-gray-600 hover:text-gray-900">
+              Smart Search
+            </Link>
+            <Link to="/mood-science" className="text-gray-600 hover:text-gray-900">
+              Science
+            </Link>
             {user ? (
               <>
                 <Link to="/favorites" className="text-gray-600 hover:text-gray-900">

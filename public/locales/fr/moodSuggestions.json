@@ -1,0 +1,17 @@
+{
+  "title": "Suggestions de Recettes par Humeur",
+  "selectMood": "Sélectionnez votre humeur",
+  "hungry": "Affamé",
+  "sad": "Triste",
+  "stressed": "Stressé",
+  "tired": "Fatigué",
+  "relaxed": "Détendu",
+  "happy": "Heureux",
+  "bored": "Ennuyé",
+  "anxious": "Anxieux",
+  "energetic": "Énergique",
+  "romantic": "Romantique",
+  "search": "Trouver des Recettes",
+  "loading": "Recherche de recettes pour votre humeur...",
+  "noResults": "Aucune recette trouvée pour cette humeur. Essayez une autre humeur ou ajoutez des recettes !"
+}

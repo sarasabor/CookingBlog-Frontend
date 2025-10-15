@@ -1,0 +1,27 @@
+{
+  "moodTitle": "Smart Recipe Suggestions",
+  "mood": "Mood",
+  "ingredients": "Available Ingredients",
+  "servings": "Number of Servings",
+  "maxCookTime": "Maximum Cooking Time (minutes)",
+  "minRating": "Minimum Rating",
+  "suggest": "Get Smart Suggestions",
+  "loading": "Finding perfect recipes for you...",
+  "noResults": "No recipes match your criteria. Try adjusting your preferences!",
+  "ingredientsByCategory": {
+    "vegetables": ["Tomatoes", "Onions", "Garlic", "Carrots", "Bell Peppers", "Spinach", "Broccoli", "Mushrooms", "Zucchini", "Eggplant"],
+    "proteins": ["Chicken", "Beef", "Fish", "Eggs", "Tofu", "Beans", "Lentils", "Cheese", "Yogurt", "Nuts"],
+    "grains": ["Rice", "Pasta", "Bread", "Quinoa", "Oats", "Barley", "Couscous", "Bulgur", "Polenta", "Buckwheat"],
+    "spices": ["Salt", "Pepper", "Basil", "Oregano", "Thyme", "Rosemary", "Cumin", "Paprika", "Turmeric", "Ginger"],
+    "dairy": ["Milk", "Butter", "Cream", "Mozzarella", "Parmesan", "Cheddar", "Ricotta", "Sour Cream", "Buttermilk", "Cream Cheese"],
+    "fruits": ["Apples", "Bananas", "Oranges", "Berries", "Lemons", "Limes", "Avocados", "Grapes", "Pears", "Peaches"]
+  },
+  "categories": {
+    "vegetables": "Vegetables",
+    "proteins": "Proteins", 
+    "grains": "Grains",
+    "spices": "Spices & Herbs",
+    "dairy": "Dairy Products",
+    "fruits": "Fruits"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "The Science Behind Mood-Based Food Suggestions",
+  "intro": "Have you ever wondered why certain foods make you feel better when you're down, or why comfort food is called 'comfort' food? There's actually fascinating science behind the connection between our emotions and our food choices.",
+  "science": "Research in nutritional psychology shows that our mood significantly influences our food preferences, and conversely, certain nutrients can positively impact our emotional state. This bidirectional relationship forms the foundation of mood-based food suggestions.",
+  "lightMood": "When we're feeling low, our brain seeks foods that can boost serotonin levels - the 'feel-good' neurotransmitter. Carbohydrates, especially complex ones, help increase serotonin production, which is why we often crave pasta, bread, or sweets when stressed or sad.",
+  "studies": "Studies have shown that foods rich in omega-3 fatty acids, magnesium, and B vitamins can help reduce anxiety and improve mood. Dark chocolate, nuts, leafy greens, and fatty fish are particularly effective at supporting mental well-being.",
+  "howItWorks": "How Our Mood-Based Suggestions Work",
+  "explanation": "Our algorithm analyzes your current mood and suggests recipes that contain ingredients scientifically proven to support that emotional state. We consider both the nutritional content and the psychological comfort that different foods provide.",
+  "hungry": "Comforting, hearty meals",
+  "sad": "Serotonin-boosting foods",
+  "stressed": "Calming, nutrient-dense options",
+  "tired": "Energy-boosting, easy-to-digest meals",
+  "relaxed": "Light, refreshing dishes",
+  "happy": "Celebratory, flavorful recipes",
+  "bored": "Exciting, adventurous cuisines",
+  "anxious": "Grounding, warm comfort foods",
+  "energetic": "High-protein, energizing meals",
+  "romantic": "Elegant, aphrodisiac ingredients",
+  "notePrefix": "Important Note:",
+  "notes": "While food can support your mood, it's not a substitute for professional mental health care. If you're experiencing persistent mood changes, please consult with a healthcare provider."
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Suggestions par Humeur",
+  "intro": "Vous êtes-vous déjà demandé pourquoi certains aliments vous font vous sentir mieux quand vous êtes triste, ou pourquoi la nourriture réconfortante est appelée 'réconfortante' ? Il y a en fait une science fascinante derrière la connexion entre nos émotions et nos choix alimentaires.",
+  "science": "La recherche en psychologie nutritionnelle montre que notre humeur influence significativement nos préférences alimentaires, et inversement, certains nutriments peuvent avoir un impact positif sur notre état émotionnel. Cette relation bidirectionnelle forme la base des suggestions alimentaires basées sur l'humeur.",
+  "lightMood": "Quand nous nous sentons bas, notre cerveau cherche des aliments qui peuvent stimuler les niveaux de sérotonine - le neurotransmetteur 'bien-être'. Les glucides, surtout les complexes, aident à augmenter la production de sérotonine, c'est pourquoi nous avons souvent envie de pâtes, de pain ou de sucreries quand nous sommes stressés ou tristes.",
+  "studies": "Des études ont montré que les aliments riches en acides gras oméga-3, magnésium et vitamines B peuvent aider à réduire l'anxiété et améliorer l'humeur. Le chocolat noir, les noix, les légumes verts et les poissons gras sont particulièrement efficaces pour soutenir le bien-être mental.",
+  "howItWorks": "Comment fonctionnent nos suggestions basées sur l'humeur",
+  "explanation": "Notre algorithme analyse votre humeur actuelle et suggère des recettes contenant des ingrédients scientifiquement prouvés pour soutenir cet état émotionnel. Nous considérons à la fois le contenu nutritionnel et le réconfort psychologique que différents aliments procurent.",
+  "hungry": "Repas réconfortants et copieux",
+  "sad": "Aliments stimulant la sérotonine",
+  "stressed": "Options apaisantes et riches en nutriments",
+  "tired": "Repas énergisants et faciles à digérer",
+  "relaxed": "Plats légers et rafraîchissants",
+  "happy": "Recettes festives et savoureuses",
+  "bored": "Cuisines excitantes et aventureuses",
+  "anxious": "Aliments réconfortants et chaleureux",
+  "energetic": "Repas riches en protéines et énergisants",
+  "romantic": "Ingrédients élégants et aphrodisiaques",
+  "notePrefix": "Note importante :",
+  "notes": "Bien que la nourriture puisse soutenir votre humeur, elle n'est pas un substitut aux soins de santé mentale professionnels. Si vous ressentez des changements d'humeur persistants, veuillez consulter un professionnel de la santé."
+}

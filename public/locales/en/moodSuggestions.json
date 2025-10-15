@@ -1,0 +1,17 @@
+{
+  "title": "Mood-Based Recipe Suggestions",
+  "selectMood": "Select your mood",
+  "hungry": "Hungry",
+  "sad": "Sad",
+  "stressed": "Stressed",
+  "tired": "Tired",
+  "relaxed": "Relaxed",
+  "happy": "Happy",
+  "bored": "Bored",
+  "anxious": "Anxious",
+  "energetic": "Energetic",
+  "romantic": "Romantic",
+  "search": "Find Recipes",
+  "loading": "Finding recipes for your mood...",
+  "noResults": "No recipes found for this mood. Try a different mood or add some recipes!"
+}

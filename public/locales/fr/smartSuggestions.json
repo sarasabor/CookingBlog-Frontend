@@ -1,0 +1,27 @@
+{
+  "moodTitle": "Suggestions Intelligentes de Recettes",
+  "mood": "Humeur",
+  "ingredients": "Ingrédients Disponibles",
+  "servings": "Nombre de Portions",
+  "maxCookTime": "Temps de Cuisson Maximum (minutes)",
+  "minRating": "Note Minimum",
+  "suggest": "Obtenir des Suggestions Intelligentes",
+  "loading": "Recherche de recettes parfaites pour vous...",
+  "noResults": "Aucune recette ne correspond à vos critères. Essayez d'ajuster vos préférences !",
+  "ingredientsByCategory": {
+    "vegetables": ["Tomates", "Oignons", "Ail", "Carottes", "Poivrons", "Épinards", "Brocoli", "Champignons", "Courgettes", "Aubergines"],
+    "proteins": ["Poulet", "Bœuf", "Poisson", "Œufs", "Tofu", "Haricots", "Lentilles", "Fromage", "Yaourt", "Noix"],
+    "grains": ["Riz", "Pâtes", "Pain", "Quinoa", "Avoine", "Orge", "Couscous", "Boulgour", "Polenta", "Sarrasin"],
+    "spices": ["Sel", "Poivre", "Basilic", "Origan", "Thym", "Romarin", "Cumin", "Paprika", "Curcuma", "Gingembre"],
+    "dairy": ["Lait", "Beurre", "Crème", "Mozzarella", "Parmesan", "Cheddar", "Ricotta", "Crème Sour", "Babeurre", "Fromage à la Crème"],
+    "fruits": ["Pommes", "Bananes", "Oranges", "Baies", "Citrons", "Limes", "Avocats", "Raisins", "Poires", "Pêches"]
+  },
+  "categories": {
+    "vegetables": "Légumes",
+    "proteins": "Protéines",
+    "grains": "Céréales",
+    "spices": "Épices et Herbes",
+    "dairy": "Produits Laitiers",
+    "fruits": "Fruits"
+  }
+}
