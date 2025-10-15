@@ -37,6 +37,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/login', { email, password })
       const { token, user } = response.data
+      
+      console.log('Token received from server:', token.substring(0, 20) + '...');
+      console.log('Token length:', token.length);
+      
       localStorage.setItem('token', token)
       setUser(user)
       return { success: true }
