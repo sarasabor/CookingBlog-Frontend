@@ -9,9 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Test pour vérifier que Tailwind fonctionne */
+.test-tailwind {
+  @apply bg-blue-500 text-white p-4 rounded-lg;
 }
