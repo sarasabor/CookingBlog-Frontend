@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  background-color: #faf7f3;
   color: #333;
 }
 
@@ -108,4 +108,9 @@ code {
 /* Smooth scrolling for better UX */
 html {
   scroll-behavior: smooth;
+}
+
+/* Custom Background Color */
+.bg-warm-cream {
+  background-color: #faf7f3;
 }

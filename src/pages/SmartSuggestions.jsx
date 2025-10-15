@@ -63,7 +63,7 @@
 //         🧠 {t("moodTitle")}
 //       </h2>
 
-//       <form onSubmit={handleSubmit} className="bg-[#faf7f3] p-6 rounded-xl shadow space-y-6">
+//       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow space-y-6">
 
 //         <div>
 //           <label className="block mb-2 font-medium">{t("selectMood")}:</label>
@@ -280,7 +280,7 @@ function SmartSuggestions() {
         {t("moodTitle")}
       </h2>
 
-      <form onSubmit={handleSubmit} className="bg-[#faf7f3] p-6 rounded-xl shadow space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow space-y-6">
 
         {/* ✅ Mood */}
         <div>
