@@ -11,9 +11,9 @@ function MoodScience() {
       id="why-mood-suggestions"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="bg-white rounded-xl shadow-lg p-8">
+      <div className="p-8 bg-white shadow-lg rounded-xl">
         <h2 className={`text-3xl font-bold text-[#567158] mb-8 text-center`}>
-          <span className="text-2xl mr-2">🧠</span>
+          <span className="mr-2 text-2xl">🧠</span>
           {t("title")}
         </h2>
 
@@ -26,7 +26,7 @@ function MoodScience() {
 
         <div className="mt-8">
           <h3 className={`text-xl font-semibold text-[#567158] mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-            <span className="text-2xl mr-2">🍽️</span>
+            <span className="mr-2 text-2xl">🍽️</span>
             {t("howItWorks")}
           </h3>
           <p className={`mb-6 leading-relaxed text-gray-700 ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -81,8 +81,8 @@ function MoodScience() {
           <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <span className="text-2xl">💡</span>
             <div>
-              <strong className="text-yellow-800 font-semibold">{t("notePrefix")}</strong>
-              <p className="text-yellow-700 mt-1">{t("notes")}</p>
+              <strong className="font-semibold text-yellow-800">{t("notePrefix")}</strong>
+              <p className="mt-1 text-yellow-700">{t("notes")}</p>
             </div>
           </div>
         </div>

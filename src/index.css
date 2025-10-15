@@ -93,3 +93,19 @@ code {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Header Fixed Styles */
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
