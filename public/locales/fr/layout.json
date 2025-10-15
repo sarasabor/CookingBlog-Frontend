@@ -4,9 +4,16 @@
   "addRecipe": "Ajouter une Recette",
   "moodSuggestions": "Par Humeur",
   "smartSuggestions": "Recherche Intelligente",
+  "science": "Science",
   "whyMood": "Pourquoi des suggestions basées sur l'humeur ?",
   "favorites": "Favoris",
   "register": "S'inscrire",
   "login": "Se connecter",
-  "logout": "Se déconnecter"
+  "logout": "Se déconnecter",
+  "language": "Langue",
+  "cookingBlog": "Cooking Blog",
+  "navigation": {
+    "menu": "Menu",
+    "close": "Fermer"
+  }
 }

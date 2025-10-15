@@ -35,39 +35,39 @@ function Home() {
             {t("moodSuggestions")}
           </Link>
           
-          <Link
-            to="/smart-suggestions"
-            className="btn-outline btn-large card-hover"
-          >
-            Smart Search
-          </Link>
-          
-          <Link
-            to="/mood-science"
-            className="btn-outline btn-large card-hover"
-          >
-            Science
-          </Link>
+                 <Link
+                   to="/smart-suggestions"
+                   className="btn-outline btn-large card-hover"
+                 >
+                   {t("smartSearch")}
+                 </Link>
+
+                 <Link
+                   to="/mood-science"
+                   className="btn-outline btn-large card-hover"
+                 >
+                   {t("science")}
+                 </Link>
         </div>
 
         {/* Features Preview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <div className="card card-hover text-center">
             <div className="text-4xl mb-4">🍽️</div>
-            <h3 className="text-xl font-semibold text-[#567158] mb-3">Rich Recipes</h3>
-            <p className="text-gray-600">Discover delicious recipes from around the world with detailed instructions and beautiful photos.</p>
+            <h3 className="text-xl font-semibold text-[#567158] mb-3">{t("features.richRecipes")}</h3>
+            <p className="text-gray-600">{t("features.richRecipesDesc")}</p>
           </div>
-          
+
           <div className="card card-hover text-center">
             <div className="text-4xl mb-4">😊</div>
-            <h3 className="text-xl font-semibold text-[#567158] mb-3">Mood-Based</h3>
-            <p className="text-gray-600">Get personalized recipe suggestions based on your current mood and emotional state.</p>
+            <h3 className="text-xl font-semibold text-[#567158] mb-3">{t("features.moodBased")}</h3>
+            <p className="text-gray-600">{t("features.moodBasedDesc")}</p>
           </div>
-          
+
           <div className="card card-hover text-center">
             <div className="text-4xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-[#567158] mb-3">Smart Search</h3>
-            <p className="text-gray-600">Find perfect recipes using advanced filters for ingredients, time, and preferences.</p>
+            <h3 className="text-xl font-semibold text-[#567158] mb-3">{t("features.smartSearch")}</h3>
+            <p className="text-gray-600">{t("features.smartSearchDesc")}</p>
           </div>
         </div>
       </div>

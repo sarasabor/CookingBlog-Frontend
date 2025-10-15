@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 const Header = () => {
   const { user, logout } = useAuth()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation('layout')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   const changeLanguage = (lng) => {
@@ -19,23 +19,23 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold text-[#567158] hover:text-[#4a5d4b] transition-colors">
-              Cooking Blog
+              {t('cookingBlog')}
             </Link>
           </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/recipes" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-              Recipes
+              {t('recipes')}
             </Link>
             <Link to="/mood-suggestions" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-              By Mood
+              {t('moodSuggestions')}
             </Link>
             <Link to="/smart-suggestions" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-              Smart Search
+              {t('smartSuggestions')}
             </Link>
             <Link to="/mood-science" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-              Science
+              {t('science')}
             </Link>
             
             {/* Language Switcher */}
@@ -64,17 +64,17 @@ const Header = () => {
             {user ? (
               <div className="flex items-center space-x-4 ml-4">
                 <Link to="/favorites" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-                  Favorites
+                  {t('favorites')}
                 </Link>
                 {user.role === 'admin' && (
                   <Link to="/add-recipe" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-                    Add Recipe
+                    {t('addRecipe')}
                   </Link>
                 )}
                 <button
                   onClick={logout}
                   className="p-2 rounded-lg text-[#567158] hover:text-[#4a5d4b] hover:bg-[#567158]/10 transition-all duration-200"
-                  title="Logout"
+                  title={t('logout')}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -84,10 +84,10 @@ const Header = () => {
             ) : (
               <div className="flex items-center space-x-4 ml-4">
                 <Link to="/login" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
-                  Login
+                  {t('login')}
                 </Link>
                 <Link to="/register" className="btn-small">
-                  Register
+                  {t('register')}
                 </Link>
               </div>
             )}
@@ -117,33 +117,33 @@ const Header = () => {
                 className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Recipes
+                {t('recipes')}
               </Link>
               <Link 
                 to="/mood-suggestions" 
                 className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                By Mood
+                {t('moodSuggestions')}
               </Link>
               <Link 
                 to="/smart-suggestions" 
                 className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Smart Search
+                {t('smartSuggestions')}
               </Link>
               <Link 
                 to="/mood-science" 
                 className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Science
+                {t('science')}
               </Link>
               
               {/* Mobile Language Switcher */}
               <div className="flex items-center space-x-2 pt-2 border-t border-gray-200">
-                <span className="text-sm text-gray-500">Language:</span>
+                <span className="text-sm text-gray-500">{t('language')}:</span>
                 <button
                   onClick={() => changeLanguage('en')}
                   className={`lang-btn ${i18n.language === 'en' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
@@ -172,7 +172,7 @@ const Header = () => {
                     className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Favorites
+                    {t('favorites')}
                   </Link>
                   {user.role === 'admin' && (
                     <Link 
@@ -180,7 +180,7 @@ const Header = () => {
                       className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Add Recipe
+                      {t('addRecipe')}
                     </Link>
                   )}
                   <button
@@ -189,12 +189,12 @@ const Header = () => {
                       setIsMobileMenuOpen(false)
                     }}
                     className="flex items-center space-x-2 p-2 rounded-lg text-[#567158] hover:text-[#4a5d4b] hover:bg-[#567158]/10 transition-all duration-200 w-fit"
-                    title="Logout"
+                    title={t('logout')}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    <span className="text-sm font-medium">Logout</span>
+                    <span className="text-sm font-medium">{t('logout')}</span>
                   </button>
                 </div>
               ) : (
@@ -204,14 +204,14 @@ const Header = () => {
                     className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Login
+                    {t('login')}
                   </Link>
                   <Link 
                     to="/register" 
                     className="btn-small w-fit"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Register
+                    {t('register')}
                   </Link>
                 </div>
               )}

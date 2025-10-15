@@ -1,6 +1,16 @@
 {
-"welcome": "Bienvenue sur MoodBite Kitchen",
-"description": "Découvrez de délicieuses recettes pour chaque humeur. Que vous ayez envie de quelque chose de léger, sucré, rapide ou raffiné – nous avons la recette parfaite pour vous.",
-"browse": "Parcourir les recettes",
-"moodSuggestions": "Suggestions d'Humeur"
+  "welcome": "Bienvenue sur MoodBite Kitchen",
+  "description": "Découvrez de délicieuses recettes pour chaque humeur. Que vous ayez envie de quelque chose de léger, sucré, rapide ou raffiné – nous avons la recette parfaite pour vous.",
+  "browse": "Parcourir les Recettes",
+  "moodSuggestions": "Suggestions d'Humeur",
+  "smartSearch": "Recherche Intelligente",
+  "science": "Science",
+  "features": {
+    "richRecipes": "Recettes Riches",
+    "richRecipesDesc": "Découvrez de délicieuses recettes du monde entier avec des instructions détaillées et de belles photos.",
+    "moodBased": "Basé sur l'Humeur",
+    "moodBasedDesc": "Obtenez des suggestions de recettes personnalisées basées sur votre humeur et état émotionnel actuels.",
+    "smartSearch": "Recherche Intelligente",
+    "smartSearchDesc": "Trouvez des recettes parfaites en utilisant des filtres avancés pour les ingrédients, le temps et les préférences."
+  }
 }

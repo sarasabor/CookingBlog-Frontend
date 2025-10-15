@@ -3,10 +3,17 @@
   "recipes": "الوصفات",
   "addRecipe": "إضافة وصفة",
   "moodSuggestions": "حسب المزاج",
-  "smartSuggestions": "بحث ذكي",
-  "whyMood": "لماذا الوصفات حسب المزاج؟",
+  "smartSuggestions": "البحث الذكي",
+  "science": "العلم",
+  "whyMood": "لماذا اقتراحات قائمة على المزاج؟",
   "favorites": "المفضلة",
-  "register": "تسجيل",
-  "login": "دخول",
-  "logout": "خروج"
+  "register": "التسجيل",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج",
+  "language": "اللغة",
+  "cookingBlog": "مدونة الطبخ",
+  "navigation": {
+    "menu": "القائمة",
+    "close": "إغلاق"
+  }
 }

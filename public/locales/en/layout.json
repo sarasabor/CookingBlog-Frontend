@@ -4,9 +4,16 @@
   "addRecipe": "Add Recipe",
   "moodSuggestions": "By Mood",
   "smartSuggestions": "Smart Search",
+  "science": "Science",
   "whyMood": "Why mood-based suggestions?",
   "favorites": "Favorites",
   "register": "Register",
   "login": "Login",
-  "logout": "Logout"
+  "logout": "Logout",
+  "language": "Language",
+  "cookingBlog": "Cooking Blog",
+  "navigation": {
+    "menu": "Menu",
+    "close": "Close"
+  }
 }

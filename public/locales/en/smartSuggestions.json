@@ -8,6 +8,10 @@
   "suggest": "Get Smart Suggestions",
   "loading": "Finding perfect recipes for you...",
   "noResults": "No recipes match your criteria. Try adjusting your preferences!",
+  "searchIngredients": "Search ingredients...",
+  "selectIngredients": "Select ingredients you have",
+  "clearSelection": "Clear Selection",
+  "selectedCount": "{{count}} ingredients selected",
   "ingredientsByCategory": {
     "vegetables": ["Tomatoes", "Onions", "Garlic", "Carrots", "Bell Peppers", "Spinach", "Broccoli", "Mushrooms", "Zucchini", "Eggplant"],
     "proteins": ["Chicken", "Beef", "Fish", "Eggs", "Tofu", "Beans", "Lentils", "Cheese", "Yogurt", "Nuts"],
@@ -23,6 +27,18 @@
     "spices": "Spices & Herbs",
     "dairy": "Dairy Products",
     "fruits": "Fruits"
+  },
+  "moods": {
+    "hungry": "Hungry",
+    "sad": "Sad",
+    "stressed": "Stressed",
+    "tired": "Tired",
+    "relaxed": "Relaxed",
+    "happy": "Happy",
+    "bored": "Bored",
+    "romantic": "Romantic",
+    "anxious": "Anxious",
+    "energetic": "Energetic"
   }
 }
 

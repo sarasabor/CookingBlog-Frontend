@@ -8,6 +8,10 @@
   "suggest": "Obtenir des Suggestions Intelligentes",
   "loading": "Recherche de recettes parfaites pour vous...",
   "noResults": "Aucune recette ne correspond à vos critères. Essayez d'ajuster vos préférences !",
+  "searchIngredients": "Rechercher des ingrédients...",
+  "selectIngredients": "Sélectionnez les ingrédients que vous avez",
+  "clearSelection": "Effacer la Sélection",
+  "selectedCount": "{{count}} ingrédients sélectionnés",
   "ingredientsByCategory": {
     "vegetables": ["Tomates", "Oignons", "Ail", "Carottes", "Poivrons", "Épinards", "Brocoli", "Champignons", "Courgettes", "Aubergines"],
     "proteins": ["Poulet", "Bœuf", "Poisson", "Œufs", "Tofu", "Haricots", "Lentilles", "Fromage", "Yaourt", "Noix"],
@@ -23,6 +27,18 @@
     "spices": "Épices et Herbes",
     "dairy": "Produits Laitiers",
     "fruits": "Fruits"
+  },
+  "moods": {
+    "hungry": "Affamé",
+    "sad": "Triste",
+    "stressed": "Stressé",
+    "tired": "Fatigué",
+    "relaxed": "Détendu",
+    "happy": "Heureux",
+    "bored": "Ennuyé",
+    "romantic": "Romantique",
+    "anxious": "Anxieux",
+    "energetic": "Énergique"
   }
 }
 

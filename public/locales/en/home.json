@@ -1,6 +1,16 @@
 {
-"welcome": "Welcome to MoodBite Kitchen",
-"description": "Discover delicious recipes for every mood. Whether you're in the mood for something light, sweet, quick or fancy – we have the perfect recipe for you.",
-"browse": "Browse Recipes",
-"moodSuggestions": "Mood Suggestions"
+  "welcome": "Welcome to MoodBite Kitchen",
+  "description": "Discover delicious recipes for every mood. Whether you're in the mood for something light, sweet, quick or fancy – we have the perfect recipe for you.",
+  "browse": "Browse Recipes",
+  "moodSuggestions": "Mood Suggestions",
+  "smartSearch": "Smart Search",
+  "science": "Science",
+  "features": {
+    "richRecipes": "Rich Recipes",
+    "richRecipesDesc": "Discover delicious recipes from around the world with detailed instructions and beautiful photos.",
+    "moodBased": "Mood-Based",
+    "moodBasedDesc": "Get personalized recipe suggestions based on your current mood and emotional state.",
+    "smartSearch": "Smart Search",
+    "smartSearchDesc": "Find perfect recipes using advanced filters for ingredients, time, and preferences."
+  }
 }
