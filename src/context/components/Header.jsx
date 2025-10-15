@@ -6,98 +6,211 @@ import { useTranslation } from 'react-i18next'
 const Header = () => {
   const { user, logout } = useAuth()
   const { i18n } = useTranslation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng)
   }
 
   return (
-    <header className="bg-white shadow-sm border-b">
+    <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-xl font-bold text-gray-900">
+            <Link to="/" className="text-xl font-bold text-[#567158] hover:text-[#4a5d4b] transition-colors">
               Cooking Blog
             </Link>
           </div>
           
-          <nav className="flex items-center space-x-4">
-            <Link to="/recipes" className="text-gray-600 hover:text-gray-900">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link to="/recipes" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
               Recipes
             </Link>
-            <Link to="/mood-suggestions" className="text-gray-600 hover:text-gray-900">
+            <Link to="/mood-suggestions" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
               By Mood
             </Link>
-            <Link to="/smart-suggestions" className="text-gray-600 hover:text-gray-900">
+            <Link to="/smart-suggestions" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
               Smart Search
             </Link>
-            <Link to="/mood-science" className="text-gray-600 hover:text-gray-900">
+            <Link to="/mood-science" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
               Science
             </Link>
+            
             {/* Language Switcher */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 ml-4">
               <button
                 onClick={() => changeLanguage('en')}
-                className={`px-2 py-1 text-sm rounded ${
-                  i18n.language === 'en' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
+                className={`lang-btn ${i18n.language === 'en' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
               >
                 EN
               </button>
               <button
                 onClick={() => changeLanguage('fr')}
-                className={`px-2 py-1 text-sm rounded ${
-                  i18n.language === 'fr' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
+                className={`lang-btn ${i18n.language === 'fr' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
               >
                 FR
               </button>
               <button
                 onClick={() => changeLanguage('ar')}
-                className={`px-2 py-1 text-sm rounded ${
-                  i18n.language === 'ar' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
+                className={`lang-btn ${i18n.language === 'ar' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
               >
                 عربي
               </button>
             </div>
 
+            {/* User Actions */}
             {user ? (
-              <>
-                <Link to="/favorites" className="text-gray-600 hover:text-gray-900">
+              <div className="flex items-center space-x-4 ml-4">
+                <Link to="/favorites" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
                   Favorites
                 </Link>
-                {/* Only show Add Recipe for admin users */}
                 {user.role === 'admin' && (
-                  <Link to="/add-recipe" className="text-gray-600 hover:text-gray-900">
+                  <Link to="/add-recipe" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
                     Add Recipe
                   </Link>
                 )}
                 <button
                   onClick={logout}
-                  className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+                  className="btn-small bg-red-500 hover:bg-red-600 text-white"
                 >
                   Logout
                 </button>
-              </>
+              </div>
             ) : (
-              <>
-                <Link to="/login" className="text-gray-600 hover:text-gray-900">
+              <div className="flex items-center space-x-4 ml-4">
+                <Link to="/login" className="text-gray-600 hover:text-[#567158] font-medium transition-colors">
                   Login
                 </Link>
-                <Link to="/register" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                <Link to="/register" className="btn-small">
                   Register
                 </Link>
-              </>
+              </div>
             )}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-[#567158] hover:bg-gray-100"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 py-4">
+            <nav className="flex flex-col space-y-4">
+              <Link 
+                to="/recipes" 
+                className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Recipes
+              </Link>
+              <Link 
+                to="/mood-suggestions" 
+                className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                By Mood
+              </Link>
+              <Link 
+                to="/smart-suggestions" 
+                className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Smart Search
+              </Link>
+              <Link 
+                to="/mood-science" 
+                className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Science
+              </Link>
+              
+              {/* Mobile Language Switcher */}
+              <div className="flex items-center space-x-2 pt-2 border-t border-gray-200">
+                <span className="text-sm text-gray-500">Language:</span>
+                <button
+                  onClick={() => changeLanguage('en')}
+                  className={`lang-btn ${i18n.language === 'en' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => changeLanguage('fr')}
+                  className={`lang-btn ${i18n.language === 'fr' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
+                >
+                  FR
+                </button>
+                <button
+                  onClick={() => changeLanguage('ar')}
+                  className={`lang-btn ${i18n.language === 'ar' ? 'lang-btn-active' : 'lang-btn-inactive'}`}
+                >
+                  عربي
+                </button>
+              </div>
+
+              {/* Mobile User Actions */}
+              {user ? (
+                <div className="flex flex-col space-y-3 pt-2 border-t border-gray-200">
+                  <Link 
+                    to="/favorites" 
+                    className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Favorites
+                  </Link>
+                  {user.role === 'admin' && (
+                    <Link 
+                      to="/add-recipe" 
+                      className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Add Recipe
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      logout()
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className="btn-small bg-red-500 hover:bg-red-600 text-white w-fit"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col space-y-3 pt-2 border-t border-gray-200">
+                  <Link 
+                    to="/login" 
+                    className="text-gray-600 hover:text-[#567158] font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link 
+                    to="/register" 
+                    className="btn-small w-fit"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   )
