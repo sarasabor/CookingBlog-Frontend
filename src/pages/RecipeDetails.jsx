@@ -1,4 +1,4 @@
-// import React, { useEffect, useState, useContext } from "react";
+// import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 // import api from "../services/api";
 // import { useTranslation } from "react-i18next";
@@ -165,17 +165,17 @@
 // export default RecipeDetails;
 
 
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useTranslation } from "react-i18next";
-import { AuthProvider } from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 
 function RecipeDetails() {
   const { t, i18n } = useTranslation("recipeDetails");
   const lang = i18n.language.slice(0, 2); // ✅ دعم en, fr, ar فقط
   const { id } = useParams();
-  const { user } = useContext(AuthProvider);
+  const { user } = useAuth();
 
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);

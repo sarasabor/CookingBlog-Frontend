@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 
 function AddRecipe() {
   const { t } = useTranslation("addRecipe");
   const navigate = useNavigate();
-  const { user } = useContext(AuthProvider);
+  const { user } = useAuth();
 
   const [form, setForm] = useState({
     title: "",
