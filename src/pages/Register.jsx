@@ -33,12 +33,12 @@ if (form.password !== form.confirm) {
 }
 
 try {
-  await register({
-    username: form.username,
-    email: form.email,
-    password: form.password,
-  });
-  navigate("/login");
+  const result = await register(form.username, form.email, form.password);
+  if (result.success) {
+    navigate("/login");
+  } else {
+    setError(result.error || t("errors.registration"));
+  }
 } catch (err) {
   setError(err.response?.data?.message || t("errors.registration"));
 }

@@ -19,8 +19,12 @@ const handleSubmit = async (e) => {
 e.preventDefault();
 setError("");
 try {
-  await login(form);
-  navigate("/recipes");
+  const result = await login(form.email, form.password);
+  if (result.success) {
+    navigate("/recipes");
+  } else {
+    setError(result.error || t("error"));
+  }
 } catch (err) {
   setError(err.response?.data?.message || t("error"));
 }
