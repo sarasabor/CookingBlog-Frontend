@@ -23,13 +23,17 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-[#567158] shadow-lg fixed top-0 left-0 right-0 z-50">
+    <header className="bg-gradient-to-r from-[#567158] to-[#4a5d4b] shadow-lg fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <img src="/favicon.gif" alt="Logo" className="w-8 h-8" />
-            <Link to="/" className="text-xl font-bold text-white hover:text-gray-200 transition-colors">
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/favicon.gif" 
+              alt="MoodBite Kitchen Logo" 
+              className="w-10 h-10 rounded-full bg-white p-1 shadow-sm hover:shadow-md transition-shadow duration-200" 
+            />
+            <Link to="/" className="text-xl font-bold text-white hover:text-gray-100 transition-colors duration-200">
               {t('cookingBlog')}
             </Link>
           </div>
@@ -328,10 +332,19 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12 mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p>&copy; 2025 MoodBite Kitchen. All rights reserved.</p>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img 
+              src="/favicon.gif" 
+              alt="MoodBite Kitchen Logo" 
+              className="w-12 h-12 rounded-full bg-white p-1.5 shadow-lg" 
+            />
+            <h3 className="text-2xl font-bold">MoodBite Kitchen</h3>
+          </div>
+          <p className="text-gray-300 mb-4">Cuisinez selon votre humeur, savourez avec passion</p>
+          <p className="text-gray-400 text-sm">&copy; 2025 MoodBite Kitchen. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

@@ -53,22 +53,22 @@ function RecipeCard({ recipe, hideFavoriteButton = false }) {
   return (
     <div
       onClick={handleCardClick}
-      className="card card-hover cursor-pointer overflow-hidden"
+      className="card card-hover cursor-pointer overflow-hidden group"
     >
       {/* Image */}
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-xl -m-6 mb-4">
         <img
           src={imageSrc}
           alt={recipe.title?.[lang] || t("unknown")}
-          className="h-48 w-full object-cover rounded-lg"
+          className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {!hideFavoriteButton && (
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 ${
+            className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md transition-all duration-300 shadow-lg hover:scale-110 ${
               isFavorite 
-                ? 'bg-red-500 text-white hover:bg-red-600' 
-                : 'bg-white/80 text-gray-400 hover:text-red-500 hover:bg-white'
+                ? 'bg-red-500/90 text-white hover:bg-red-600' 
+                : 'bg-white/90 text-gray-400 hover:text-red-500 hover:bg-white'
             }`}
             title={isFavorite ? t("unsave") : t("save")}
           >
@@ -90,30 +90,30 @@ function RecipeCard({ recipe, hideFavoriteButton = false }) {
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <h3 className="text-xl font-semibold text-[#567158] mb-2 line-clamp-2">
+      <div className="pt-2">
+        <h3 className="text-xl font-bold text-[#567158] mb-3 line-clamp-2 group-hover:text-[#4a5d4b] transition-colors">
           {recipe.title?.[lang] || t("unknown")}
         </h3>
 
-        <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
-          <span className="flex items-center">
-            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+          <span className="flex items-center gap-1.5 font-medium">
+            <svg className="w-4 h-4 text-[#567158]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {recipe.cookTime} {t("minutes")}
           </span>
-          <span className="px-2 py-1 bg-gray-100 rounded-full text-xs font-medium">
+          <span className="px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 rounded-full text-xs font-semibold text-gray-700">
             {t(`difficultyLevels.${recipe.difficulty?.toLowerCase() || "easy"}`)}
           </span>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="px-2 py-1 bg-[#567158]/10 text-[#567158] rounded-full text-xs font-medium">
+          <span className="px-3 py-1.5 bg-gradient-to-r from-[#567158]/10 to-[#567158]/5 text-[#567158] rounded-full text-xs font-semibold border border-[#567158]/20">
             {t(`moods.${recipe.mood}`)}
           </span>
           {recipe.averageRating > 0 && (
-            <div className="flex items-center text-sm text-gray-600">
-              <svg className="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <div className="flex items-center text-sm font-semibold text-gray-700 bg-amber-50 px-2.5 py-1 rounded-full">
+              <svg className="w-4 h-4 text-amber-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
               {recipe.averageRating.toFixed(1)}
