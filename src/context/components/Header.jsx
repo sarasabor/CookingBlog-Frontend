@@ -13,23 +13,6 @@ const Header = () => {
     i18n.changeLanguage(lng)
   }
 
-  // Cooking pot icon component
-  const CookingPotIcon = ({ className = "w-6 h-6" }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Pot body */}
-      <path d="M6 8C6 6.89543 6.89543 6 8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8Z" fill="currentColor" stroke="currentColor" strokeWidth="1.5"/>
-      {/* Pot handles */}
-      <path d="M4 10C4 9.44772 4.44772 9 5 9C5.55228 9 6 9.44772 6 10V14C6 14.5523 5.55228 15 5 15C4.44772 15 4 14.5523 4 14V10Z" fill="currentColor"/>
-      <path d="M18 10C18 9.44772 18.4477 9 19 9C19.5523 9 20 9.44772 20 10V14C20 14.5523 19.5523 15 19 15C18.4477 15 18 14.5523 18 14V10Z" fill="currentColor"/>
-      {/* Steam */}
-      <path d="M10 4C10 3.44772 10.4477 3 11 3C11.5523 3 12 3.44772 12 4C12 4.55228 11.5523 5 11 5C10.4477 5 10 4.55228 10 4Z" fill="currentColor"/>
-      <path d="M13 2C13 1.44772 13.4477 1 14 1C14.5523 1 15 1.44772 15 2C15 2.55228 14.5523 3 14 3C13.4477 3 13 2.55228 13 2Z" fill="currentColor"/>
-      {/* Face */}
-      <circle cx="9" cy="11" r="0.8" fill="white"/>
-      <circle cx="15" cy="11" r="0.8" fill="white"/>
-      <path d="M10 13C10 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13C14 13.5523 13.5523 14 13 14H11C10.4477 14 10 13.5523 10 13Z" fill="white"/>
-    </svg>
-  )
 
   // Check if a route is active
   const isActiveRoute = (path) => {
@@ -45,7 +28,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <CookingPotIcon className="w-8 h-8 text-white" />
+            <img src="/favicon.gif" alt="Logo" className="w-8 h-8" />
             <Link to="/" className="text-xl font-bold text-white hover:text-gray-200 transition-colors">
               {t('cookingBlog')}
             </Link>
