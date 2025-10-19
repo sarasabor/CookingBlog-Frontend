@@ -11,7 +11,7 @@ function Home() {
       <div className="max-w-5xl mx-auto text-center">
         {/* Hero Section */}
         <div className="mb-16">
-          <div className="inline-block p-4 mb-6 rounded-full shadow-lg bg-white/50 backdrop-blur-sm">
+          <div className="inline-block mb-6 rounded-full shadow-lg p- bg-white/50 backdrop-blur-sm">
             <img 
               src="/favicon.gif" 
               alt="MoodBite Kitchen" 

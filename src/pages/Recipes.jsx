@@ -118,7 +118,7 @@ function Recipes() {
         </div>
       ) : !recipes || recipes.length === 0 ? (
         <div className="text-center py-20">
-          <div className="inline-block p-6 bg-white/50 backdrop-blur-sm rounded-full shadow-lg mb-6">
+          <div className="inline-block bg-white/50 backdrop-blur-sm rounded-full shadow-lg mb-6">
             <div className="text-7xl">🍽️</div>
           </div>
           <h3 className="text-2xl font-bold text-gray-700 mb-3">{t("noRecipes")}</h3>

@@ -78,17 +78,17 @@ function Favorites() {
   }, [moodFilter, timeFilter, search, recipes]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-6xl px-4 py-10 mx-auto">
       <h1 className="text-3xl font-bold text-[#567158] mb-8 text-center">
         {t("title")}
       </h1>
 
       {/* Filters Section */}
-      <div className="bg-white p-6 rounded-xl shadow-lg mb-8 space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="p-6 mb-8 space-y-4 bg-white shadow-lg rounded-xl">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {/* Search */}
           <div className="md:col-span-1">
-            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("search")}</label>
+            <label className="block mb-2 text-sm font-semibold tracking-wide text-gray-700 uppercase">{t("search")}</label>
             <div className="relative">
               <input
                 type="text"
@@ -107,7 +107,7 @@ function Favorites() {
 
           {/* Mood Filter */}
           <div>
-            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("mood")}</label>
+            <label className="block mb-2 text-sm font-semibold tracking-wide text-gray-700 uppercase">{t("mood")}</label>
             <div className="relative">
               <select
                 value={moodFilter}
@@ -131,7 +131,7 @@ function Favorites() {
 
           {/* Time Filter */}
           <div>
-            <label className="block mb-2 text-sm font-semibold text-gray-700 uppercase tracking-wide">{t("time")}</label>
+            <label className="block mb-2 text-sm font-semibold tracking-wide text-gray-700 uppercase">{t("time")}</label>
             <div className="relative">
               <select
                 value={timeFilter}
@@ -156,28 +156,28 @@ function Favorites() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <RecipeCardSkeleton key={index} />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+        <div className="py-16 text-center">
+          <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full">
             <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </div>
-          <p className="text-gray-500 text-lg font-medium">{t("noResults")}</p>
-          <p className="text-gray-400 text-sm mt-2">Ajoutez des recettes à vos favoris pour les voir ici</p>
+          <p className="text-lg font-medium text-gray-500">{t("noResults")}</p>
+          <p className="mt-2 text-sm text-gray-400">Ajoutez des recettes à vos favoris pour les voir ici</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((recipe) => (
             <div
               key={recipe._id}
               onClick={() => navigate(`/recipes/${recipe._id}`)}
-              className="relative cursor-pointer bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-transform duration-200 hover:scale-105 group"
+              className="relative overflow-hidden transition-transform duration-200 bg-white shadow-md cursor-pointer rounded-2xl hover:shadow-xl hover:scale-105 group"
             >
               <RecipeCard recipe={recipe} hideFavoriteButton />
 
@@ -186,11 +186,11 @@ function Favorites() {
                   e.stopPropagation(); 
                   removeFromFavorites(recipe._id);
                 }}
-                className="absolute top-3 left-3 group bg-white text-red-500 hover:bg-red-500 hover:text-white rounded-full p-2 shadow-lg transition-all duration-200"
+                className="absolute text-red-500 transition-all duration-200 bg-white rounded-full shadow-lg top-3 left-3 group hover:bg-red-500 hover:text-white"
                 title={t("remove")}
               >
                 <Trash2 className="w-4 h-4" />
-                <span className="absolute left-10 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow transition-all duration-200">
+                <span className="absolute px-2 py-1 text-xs text-white transition-all duration-200 scale-0 -translate-y-1/2 bg-gray-800 rounded shadow left-10 top-1/2 group-hover:scale-100">
                   {t("remove")}
                 </span>
               </button>

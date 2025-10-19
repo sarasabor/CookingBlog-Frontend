@@ -24,22 +24,22 @@ const Header = () => {
 
   return (
     <header className="bg-gradient-to-r from-[#567158] to-[#4a5d4b] shadow-lg fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img 
               src="/favicon.gif" 
               alt="MoodBite Kitchen Logo" 
-              className="w-10 h-10 rounded-full bg-white p-1 shadow-sm hover:shadow-md transition-shadow duration-200" 
+              className="w-10 h-10 transition-shadow duration-200 bg-white rounded-full shadow-sm hover:shadow-md" 
             />
-            <Link to="/" className="text-xl font-bold text-white hover:text-gray-100 transition-colors duration-200">
+            <Link to="/" className="text-xl font-bold text-white transition-colors duration-200 hover:text-gray-100">
               {t('cookingBlog')}
             </Link>
           </div>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="items-center hidden space-x-1 md:flex">
             <Link 
               to="/recipes" 
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
@@ -82,7 +82,7 @@ const Header = () => {
             </Link>
             
             {/* Language Switcher */}
-            <div className="flex items-center space-x-1 ml-6">
+            <div className="flex items-center ml-6 space-x-1">
               <button
                 onClick={() => changeLanguage('en')}
                 className={`px-3 py-1 text-sm rounded-md font-medium transition-all duration-200 ${
@@ -111,7 +111,7 @@ const Header = () => {
 
             {/* User Actions */}
             {user ? (
-              <div className="flex items-center space-x-2 ml-6">
+              <div className="flex items-center ml-6 space-x-2">
                 <Link 
                   to="/favorites" 
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
@@ -136,7 +136,7 @@ const Header = () => {
                 )}
                 <button
                   onClick={logout}
-                  className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+                  className="transition-all duration-200 rounded-lg text-white/80 hover:text-white hover:bg-white/10"
                   title={t('logout')}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +145,7 @@ const Header = () => {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center space-x-2 ml-6">
+              <div className="flex items-center ml-6 space-x-2">
                 <Link 
                   to="/login" 
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
@@ -169,7 +169,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-white hover:text-white hover:bg-white/10 transition-all duration-200"
+            className="text-white transition-all duration-200 rounded-lg md:hidden hover:text-white hover:bg-white/10"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
@@ -183,7 +183,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-white/20 py-4">
+          <div className="py-4 border-t md:hidden border-white/20">
             <nav className="flex flex-col space-y-2">
               <Link 
                 to="/recipes" 
@@ -231,7 +231,7 @@ const Header = () => {
               </Link>
               
               {/* Mobile Language Switcher */}
-              <div className="flex items-center space-x-2 pt-4 border-t border-white/20">
+              <div className="flex items-center pt-4 space-x-2 border-t border-white/20">
                 <span className="text-sm text-white/80">{t('language')}:</span>
                 <button
                   onClick={() => changeLanguage('en')}
@@ -261,7 +261,7 @@ const Header = () => {
 
               {/* Mobile User Actions */}
               {user ? (
-                <div className="flex flex-col space-y-2 pt-4 border-t border-white/20">
+                <div className="flex flex-col pt-4 space-y-2 border-t border-white/20">
                   <Link 
                     to="/favorites" 
                     className={`px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
@@ -291,7 +291,7 @@ const Header = () => {
                       logout()
                       setIsMobileMenuOpen(false)
                     }}
-                    className="flex items-center space-x-2 px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+                    className="flex items-center space-x-2 transition-all duration-200 rounded-lg text-white/80 hover:text-white hover:bg-white/10"
                     title={t('logout')}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -301,7 +301,7 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-col space-y-2 pt-4 border-t border-white/20">
+                <div className="flex flex-col pt-4 space-y-2 border-t border-white/20">
                   <Link 
                     to="/login" 
                     className={`px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
@@ -332,19 +332,19 @@ const Header = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12 mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="py-12 mt-16 text-white bg-gradient-to-r from-gray-800 to-gray-900">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <img 
               src="/favicon.gif" 
               alt="MoodBite Kitchen Logo" 
-              className="w-12 h-12 rounded-full bg-white p-1.5 shadow-lg" 
+              className="w-12 h-12 rounded-full bg-white shadow-lg" 
             />
             <h3 className="text-2xl font-bold">MoodBite Kitchen</h3>
           </div>
-          <p className="text-gray-300 mb-4">Cuisinez selon votre humeur, savourez avec passion</p>
-          <p className="text-gray-400 text-sm">&copy; 2025 MoodBite Kitchen. Tous droits réservés.</p>
+          <p className="mb-4 text-gray-300">Cuisinez selon votre humeur, savourez avec passion</p>
+          <p className="text-sm text-gray-400">&copy; 2025 MoodBite Kitchen. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
