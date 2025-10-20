@@ -182,7 +182,7 @@
 
 import React, { useState } from "react";
 import api from "../services/api";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import RecipeCard from "../context/components/RecipeCard";
@@ -200,6 +200,13 @@ function SmartSuggestions() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [ingredientSearch, setIngredientSearch] = useState("");
+  
+  // AI Assistant states
+  const [showAI, setShowAI] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResponse, setAiResponse] = useState("");
+  const [aiRecipes, setAiRecipes] = useState([]);
 
   const ingredientsByCategory = t("ingredientsByCategory", { returnObjects: true });
   const categories = t("categories", { returnObjects: true });
@@ -272,6 +279,42 @@ function SmartSuggestions() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // AI Assistant Handler
+  const handleAIRequest = async () => {
+    if (!aiPrompt.trim()) return;
+    
+    setAiLoading(true);
+    setAiResponse("");
+    setAiRecipes([]);
+
+    try {
+      const res = await api.post("/recipes/ai-suggestions", {
+        prompt: aiPrompt,
+        mood: mood || undefined,
+        ingredients: selectedIngredients.length > 0 ? selectedIngredients : undefined,
+        servings,
+      }, {
+        headers: {
+          "Accept-Language": lang,
+        },
+      });
+
+      setAiResponse(res.data.message || "");
+      setAiRecipes(res.data.recipes || []);
+    } catch (err) {
+      console.error("❌ Error fetching AI suggestions:", err);
+      setAiResponse(t("aiError"));
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
+  const clearAIChat = () => {
+    setAiPrompt("");
+    setAiResponse("");
+    setAiRecipes([]);
   };
 
   return (
@@ -471,6 +514,159 @@ function SmartSuggestions() {
           </motion.div>
         )}
       </div>
+
+      {/* 🤖 AI Assistant Floating Button */}
+      {!showAI && (
+        <motion.button
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setShowAI(true)}
+          className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-[#567158] to-[#3d5040] text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:shadow-3xl transition-all duration-300 z-50"
+          title={t("aiToggle")}
+        >
+          🤖
+        </motion.button>
+      )}
+
+      {/* 🤖 AI Assistant Modal */}
+      <AnimatePresence>
+        {showAI && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setShowAI(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col"
+            >
+              {/* Header */}
+              <div className="bg-gradient-to-r from-[#567158] to-[#3d5040] text-white p-6 flex justify-between items-center">
+                <div>
+                  <h3 className="text-2xl font-bold">{t("aiAssistant")}</h3>
+                  <p className="text-sm text-white/80 mt-1">{t("aiAssistantDescription")}</p>
+                </div>
+                <button
+                  onClick={() => setShowAI(false)}
+                  className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {/* Example prompts */}
+                {!aiResponse && !aiLoading && (
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-sm font-semibold text-gray-700 mb-3">{t("aiExamples")}</p>
+                    <div className="space-y-2">
+                      {[t("aiExample1"), t("aiExample2"), t("aiExample3")].map((example, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setAiPrompt(example)}
+                          className="w-full text-left text-sm text-gray-600 hover:text-[#567158] hover:bg-white p-3 rounded-lg transition-all duration-200 border border-transparent hover:border-[#567158]/20"
+                        >
+                          💡 {example}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* AI Response */}
+                {aiLoading && (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="flex flex-col items-center space-y-3">
+                      <div className="w-16 h-16 border-4 border-[#567158]/20 border-t-[#567158] rounded-full animate-spin" />
+                      <p className="text-gray-600 font-medium">{t("aiThinking")}</p>
+                    </div>
+                  </div>
+                )}
+
+                {aiResponse && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
+                  >
+                    <div className="bg-gradient-to-br from-[#567158]/5 to-[#567158]/10 rounded-xl p-5 border border-[#567158]/20">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-8 h-8 rounded-full bg-[#567158] flex items-center justify-center flex-shrink-0 text-white">
+                          🤖
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-[#567158] mb-2">{t("aiSuggestionTitle")}</p>
+                          <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{aiResponse}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* AI Recommended Recipes */}
+                    {aiRecipes.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-3">Recommended Recipes:</h4>
+                        <div className="grid grid-cols-1 gap-4">
+                          {aiRecipes.map((recipe) => (
+                            <div
+                              key={recipe._id}
+                              onClick={() => {
+                                setShowAI(false);
+                                navigate(`/recipes/${recipe._id}`);
+                              }}
+                              className="cursor-pointer hover:shadow-lg transition-shadow"
+                            >
+                              <RecipeCard recipe={recipe} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <button
+                      onClick={clearAIChat}
+                      className="w-full text-sm text-gray-600 hover:text-red-600 font-medium py-2 rounded-lg hover:bg-red-50 transition-colors"
+                    >
+                      {t("aiClearChat")}
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Input Area */}
+              <div className="p-6 bg-gray-50 border-t border-gray-200">
+                <div className="flex space-x-3">
+                  <input
+                    type="text"
+                    value={aiPrompt}
+                    onChange={(e) => setAiPrompt(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleAIRequest()}
+                    placeholder={t("aiPromptPlaceholder")}
+                    className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:border-[#567158] focus:ring-2 focus:ring-[#567158]/20 outline-none transition-all"
+                    disabled={aiLoading}
+                  />
+                  <button
+                    onClick={handleAIRequest}
+                    disabled={!aiPrompt.trim() || aiLoading}
+                    className="px-6 py-3 bg-gradient-to-r from-[#567158] to-[#3d5040] text-white rounded-xl font-medium hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  >
+                    {aiLoading ? "..." : t("aiAskButton")}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

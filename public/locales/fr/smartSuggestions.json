@@ -91,6 +91,20 @@
   "noIngredientsFound": "Aucun ingrédient trouvé",
   "tryAnotherSearch": "Essayez un autre terme de recherche",
   "ingredientsSelected": "{{count}} ingrédient(s) sélectionné(s)",
-  "clearAll": "Tout effacer"
+  "clearAll": "Tout effacer",
+  "aiAssistant": "🤖 Assistant Chef IA",
+  "aiAssistantDescription": "Obtenez des recommandations de recettes personnalisées grâce à l'intelligence artificielle",
+  "aiPromptPlaceholder": "Décrivez ce que vous voulez cuisiner ou comment vous vous sentez...",
+  "aiAskButton": "Demander au Chef IA",
+  "aiThinking": "Le Chef IA réfléchit...",
+  "aiSuggestionTitle": "Recommandations du Chef IA",
+  "aiError": "Désolé, je n'ai pas pu traiter votre demande. Veuillez réessayer.",
+  "aiClearChat": "Effacer la conversation",
+  "aiExamples": "Essayez de demander:",
+  "aiExample1": "Je me sens stressé, que devrais-je cuisiner ?",
+  "aiExample2": "Dîner rapide avec poulet et légumes",
+  "aiExample3": "Plat réconfortant pour un jour de pluie",
+  "aiToggle": "Demander au Chef IA",
+  "aiClose": "Fermer l'Assistant IA"
 }
 

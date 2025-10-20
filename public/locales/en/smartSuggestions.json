@@ -91,6 +91,20 @@
   "noIngredientsFound": "No ingredients found",
   "tryAnotherSearch": "Try another search term",
   "ingredientsSelected": "{{count}} ingredient(s) selected",
-  "clearAll": "Clear All"
+  "clearAll": "Clear All",
+  "aiAssistant": "🤖 AI Chef Assistant",
+  "aiAssistantDescription": "Get personalized recipe recommendations powered by artificial intelligence",
+  "aiPromptPlaceholder": "Describe what you want to cook or how you feel...",
+  "aiAskButton": "Ask AI Chef",
+  "aiThinking": "AI Chef is thinking...",
+  "aiSuggestionTitle": "AI Chef Recommendations",
+  "aiError": "Sorry, I couldn't process your request. Please try again.",
+  "aiClearChat": "Clear Chat",
+  "aiExamples": "Try asking:",
+  "aiExample1": "I'm feeling stressed, what should I cook?",
+  "aiExample2": "Quick dinner with chicken and vegetables",
+  "aiExample3": "Comfort food for a rainy day",
+  "aiToggle": "Ask AI Chef",
+  "aiClose": "Close AI Assistant"
 }
 
