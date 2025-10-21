@@ -207,6 +207,7 @@ function SmartSuggestions() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState("");
   const [aiRecipes, setAiRecipes] = useState([]);
+  const [selectedAIRecipe, setSelectedAIRecipe] = useState(null);
 
   const ingredientsByCategory = t("ingredientsByCategory", { returnObjects: true });
   const categories = t("categories", { returnObjects: true });
@@ -614,18 +615,26 @@ function SmartSuggestions() {
                     {/* AI Recommended Recipes */}
                     {aiRecipes.length > 0 && (
                       <div>
-                        <h4 className="font-semibold text-gray-800 mb-3">Recommended Recipes:</h4>
+                        <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                          <span className="text-2xl">🤖</span>
+                          <span>Recommended Recipes:</span>
+                          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">AI Generated</span>
+                        </h4>
                         <div className="grid grid-cols-1 gap-4">
                           {aiRecipes.map((recipe) => (
                             <div
                               key={recipe._id}
-                              onClick={() => {
-                                setShowAI(false);
-                                navigate(`/recipes/${recipe._id}`);
-                              }}
-                              className="cursor-pointer hover:shadow-lg transition-shadow"
+                              onClick={() => setSelectedAIRecipe(recipe)}
+                              className="cursor-pointer hover:shadow-lg transition-shadow relative"
                             >
                               <RecipeCard recipe={recipe} />
+                              <div className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M13 7H7v6h6V7z" />
+                                  <path fillRule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clipRule="evenodd" />
+                                </svg>
+                                <span>AI Recipe</span>
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -661,6 +670,144 @@ function SmartSuggestions() {
                   >
                     {aiLoading ? "..." : t("aiAskButton")}
                   </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* AI Recipe Details Modal */}
+      <AnimatePresence>
+        {selectedAIRecipe && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedAIRecipe(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-t-2xl">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">🤖</span>
+                      <span className="text-xs bg-white/20 px-3 py-1 rounded-full font-medium backdrop-blur-sm">
+                        AI Generated Recipe
+                      </span>
+                    </div>
+                    <h2 className="text-2xl font-bold">
+                      {selectedAIRecipe.title?.[i18n.language] || selectedAIRecipe.title?.en || "Recipe"}
+                    </h2>
+                  </div>
+                  <button
+                    onClick={() => setSelectedAIRecipe(null)}
+                    className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 space-y-6">
+                {/* Description */}
+                <div>
+                  <p className="text-gray-700 leading-relaxed">
+                    {selectedAIRecipe.description?.[i18n.language] || selectedAIRecipe.description?.en}
+                  </p>
+                </div>
+
+                {/* Meta Info */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <div className="bg-gray-50 rounded-xl p-4 text-center">
+                    <div className="text-2xl mb-1">⏱️</div>
+                    <div className="text-sm text-gray-600">Cook Time</div>
+                    <div className="text-lg font-semibold text-gray-800">{selectedAIRecipe.cookTime} min</div>
+                  </div>
+                  <div className="bg-gray-50 rounded-xl p-4 text-center">
+                    <div className="text-2xl mb-1">📊</div>
+                    <div className="text-sm text-gray-600">Difficulty</div>
+                    <div className="text-lg font-semibold text-gray-800 capitalize">{selectedAIRecipe.difficulty}</div>
+                  </div>
+                  <div className="bg-gray-50 rounded-xl p-4 text-center col-span-2 sm:col-span-1">
+                    <div className="text-2xl mb-1">💪</div>
+                    <div className="text-sm text-gray-600">Nutrition</div>
+                    <div className="text-xs font-medium text-gray-700 mt-1">{selectedAIRecipe.nutritionHighlights || "Balanced"}</div>
+                  </div>
+                </div>
+
+                {/* Ingredients */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span>🥘</span>
+                    <span>Ingredients</span>
+                  </h3>
+                  <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+                    {selectedAIRecipe.ingredients?.map((ing, idx) => (
+                      <div key={idx} className="flex items-start gap-3 p-2 hover:bg-white rounded-lg transition-colors">
+                        <span className="text-[#567158] mt-1">•</span>
+                        <span className="flex-1 text-gray-700">
+                          <span className="font-semibold">{ing.quantity} {ing.unit}</span> {ing.name?.[i18n.language] || ing.name?.en || ing.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Instructions */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span>👨‍🍳</span>
+                    <span>Instructions</span>
+                  </h3>
+                  <div className="space-y-4">
+                    {(selectedAIRecipe.instructions?.[i18n.language] || selectedAIRecipe.instructions?.en || []).map((step, idx) => (
+                      <div key={idx} className="flex gap-4">
+                        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                          {idx + 1}
+                        </div>
+                        <p className="flex-1 text-gray-700 pt-1">{step}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tags */}
+                {selectedAIRecipe.tags && selectedAIRecipe.tags.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-600 mb-2">Tags</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedAIRecipe.tags.map((tag, idx) => (
+                        <span key={idx} className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* AI Notice */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">💡</span>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-purple-900 mb-1">AI Generated Recipe</h4>
+                      <p className="text-sm text-purple-700">
+                        This recipe was created by AI based on your preferences. It may not be saved to our database, but you can screenshot or save the details for later!
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
