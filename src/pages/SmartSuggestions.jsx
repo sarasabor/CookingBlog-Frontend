@@ -282,19 +282,25 @@ function SmartSuggestions() {
     }
   };
 
-  // Helper to generate food images from Unsplash
-  const generateRecipeImage = (recipeName) => {
-    // Extract main ingredient or dish name
+  // Helper to generate UNIQUE food images from Unsplash
+  const generateRecipeImage = (recipeName, recipeId) => {
+    // Extract main ingredients and dish name for better search
     const keywords = recipeName
       .toLowerCase()
-      .replace(/\b(recipe|dish|meal|food)\b/gi, '')
+      .replace(/\b(recipe|dish|meal|food|with|and|the)\b/gi, '')
       .trim()
       .split(' ')
-      .slice(0, 2) // Take first 2 words
-      .join('+');
+      .filter(word => word.length > 3) // Only meaningful words
+      .slice(0, 3) // Take first 3 meaningful words
+      .join(',');
     
-    // Use Unsplash Source for dynamic food images
-    return `https://source.unsplash.com/800x600/?${keywords},food,cuisine`;
+    // Add unique identifier to force different images
+    // Use timestamp + recipeId to ensure uniqueness
+    const uniqueId = `${Date.now()}-${recipeId}`;
+    const seed = uniqueId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    
+    // Use Unsplash Source with sig parameter for unique images
+    return `https://source.unsplash.com/800x600/?${keywords},food,cuisine&sig=${seed}`;
   };
 
   // AI Assistant Handler
@@ -319,10 +325,13 @@ function SmartSuggestions() {
 
       setAiResponse(res.data.message || "");
       
-      // Add generated images to recipes
+      // Add generated UNIQUE images to recipes
       const recipesWithImages = (res.data.recipes || []).map(recipe => ({
         ...recipe,
-        image: generateRecipeImage(recipe.title?.en || recipe.title?.fr || recipe.title?.ar || "delicious food")
+        image: generateRecipeImage(
+          recipe.title?.en || recipe.title?.fr || recipe.title?.ar || "delicious food",
+          recipe._id
+        )
       }));
       
       setAiRecipes(recipesWithImages);
@@ -740,60 +749,60 @@ function SmartSuggestions() {
             onClick={() => setSelectedAIRecipe(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-2xl shadow-2xl w-[98vw] max-w-[1800px] h-[96vh] overflow-hidden flex flex-col"
             >
-              {/* Header with Image */}
-              <div className="sticky top-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-t-2xl">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">🤖</span>
-                      <span className="text-xs bg-white/20 px-3 py-1 rounded-full font-medium backdrop-blur-sm">
+              {/* Hero Image (disappears on scroll) */}
+              {selectedAIRecipe.image && (
+                <div className="relative h-[40vh] overflow-hidden">
+                  <img 
+                    src={selectedAIRecipe.image} 
+                    alt={selectedAIRecipe.title?.en || "AI Recipe"}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1600&h=900";
+                    }}
+                  />
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                  
+                  {/* Floating header on image */}
+                  <div className="absolute inset-x-0 top-0 p-6 flex items-start justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl">🤖</span>
+                      <span className="text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-medium shadow-lg backdrop-blur-sm">
                         AI Generated Recipe
                       </span>
                     </div>
-                    <h2 className="text-2xl font-bold">
+                    <button
+                      onClick={() => setSelectedAIRecipe(null)}
+                      className="text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all shadow-lg"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Title on image */}
+                  <div className="absolute inset-x-0 bottom-0 p-8">
+                    <h2 className="text-4xl font-bold text-white drop-shadow-2xl mb-2">
                       {selectedAIRecipe.title?.[i18n.language] || selectedAIRecipe.title?.en || "Recipe"}
                     </h2>
+                    <p className="text-lg text-white/90 drop-shadow-lg">
+                      {selectedAIRecipe.description?.[i18n.language] || selectedAIRecipe.description?.en}
+                    </p>
                   </div>
-                  <button
-                    onClick={() => setSelectedAIRecipe(null)}
-                    className="text-white/80 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
                 </div>
+              )}
+
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="p-8 space-y-8">
                 
-                {/* Recipe Image */}
-                {selectedAIRecipe.image && (
-                  <div className="rounded-xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={selectedAIRecipe.image} 
-                      alt={selectedAIRecipe.title?.en || "AI Recipe"}
-                      className="w-full h-64 object-cover"
-                      onError={(e) => {
-                        e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&h=600";
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-6 space-y-6">
-                {/* Description */}
-                <div>
-                  <p className="text-gray-700 leading-relaxed">
-                    {selectedAIRecipe.description?.[i18n.language] || selectedAIRecipe.description?.en}
-                  </p>
-                </div>
-
                 {/* Meta Info */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   <div className="bg-gray-50 rounded-xl p-4 text-center">
@@ -874,6 +883,7 @@ function SmartSuggestions() {
                       </p>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </motion.div>
