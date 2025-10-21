@@ -282,6 +282,21 @@ function SmartSuggestions() {
     }
   };
 
+  // Helper to generate food images from Unsplash
+  const generateRecipeImage = (recipeName) => {
+    // Extract main ingredient or dish name
+    const keywords = recipeName
+      .toLowerCase()
+      .replace(/\b(recipe|dish|meal|food)\b/gi, '')
+      .trim()
+      .split(' ')
+      .slice(0, 2) // Take first 2 words
+      .join('+');
+    
+    // Use Unsplash Source for dynamic food images
+    return `https://source.unsplash.com/800x600/?${keywords},food,cuisine`;
+  };
+
   // AI Assistant Handler
   const handleAIRequest = async () => {
     if (!aiPrompt.trim()) return;
@@ -303,7 +318,14 @@ function SmartSuggestions() {
       });
 
       setAiResponse(res.data.message || "");
-      setAiRecipes(res.data.recipes || []);
+      
+      // Add generated images to recipes
+      const recipesWithImages = (res.data.recipes || []).map(recipe => ({
+        ...recipe,
+        image: generateRecipeImage(recipe.title?.en || recipe.title?.fr || recipe.title?.ar || "delicious food")
+      }));
+      
+      setAiRecipes(recipesWithImages);
     } catch (err) {
       console.error("❌ Error fetching AI suggestions:", err);
       setAiResponse(t("aiError"));
@@ -546,7 +568,7 @@ function SmartSuggestions() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col"
+              className="bg-white rounded-2xl shadow-2xl max-w-7xl w-full max-h-[95vh] overflow-hidden flex flex-col"
             >
               {/* Header */}
               <div className="bg-gradient-to-r from-[#567158] to-[#3d5040] text-white p-6 flex justify-between items-center">
@@ -615,25 +637,55 @@ function SmartSuggestions() {
                     {/* AI Recommended Recipes */}
                     {aiRecipes.length > 0 && (
                       <div>
-                        <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2 text-lg">
                           <span className="text-2xl">🤖</span>
                           <span>Recommended Recipes:</span>
-                          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">AI Generated</span>
+                          <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full font-medium">AI Generated</span>
                         </h4>
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                           {aiRecipes.map((recipe) => (
                             <div
                               key={recipe._id}
                               onClick={() => setSelectedAIRecipe(recipe)}
-                              className="cursor-pointer hover:shadow-lg transition-shadow relative"
+                              className="group cursor-pointer hover:shadow-2xl transition-all duration-300 rounded-xl overflow-hidden bg-white border-2 border-transparent hover:border-purple-300 relative transform hover:-translate-y-1"
                             >
-                              <RecipeCard recipe={recipe} />
-                              <div className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
-                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M13 7H7v6h6V7z" />
-                                  <path fillRule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clipRule="evenodd" />
-                                </svg>
-                                <span>AI Recipe</span>
+                              {/* Recipe Image */}
+                              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100">
+                                <img 
+                                  src={recipe.image} 
+                                  alt={recipe.title?.en || "AI Recipe"}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                  onError={(e) => {
+                                    e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600";
+                                  }}
+                                />
+                                <div className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1 backdrop-blur-sm">
+                                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M13 7H7v6h6V7z" />
+                                    <path fillRule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clipRule="evenodd" />
+                                  </svg>
+                                  <span className="font-medium">AI</span>
+                                </div>
+                              </div>
+                              
+                              {/* Recipe Info */}
+                              <div className="p-4">
+                                <h5 className="font-bold text-gray-800 mb-2 line-clamp-2 text-base group-hover:text-purple-600 transition-colors">
+                                  {recipe.title?.[i18n.language] || recipe.title?.en}
+                                </h5>
+                                <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                                  {recipe.description?.[i18n.language] || recipe.description?.en}
+                                </p>
+                                <div className="flex items-center justify-between text-xs text-gray-500">
+                                  <span className="flex items-center gap-1">
+                                    <span>⏱️</span>
+                                    <span>{recipe.cookTime} min</span>
+                                  </span>
+                                  <span className="flex items-center gap-1">
+                                    <span>📊</span>
+                                    <span className="capitalize">{recipe.difficulty}</span>
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           ))}
@@ -694,9 +746,9 @@ function SmartSuggestions() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
             >
-              {/* Header */}
+              {/* Header with Image */}
               <div className="sticky top-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-t-2xl">
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-2xl">🤖</span>
@@ -717,6 +769,20 @@ function SmartSuggestions() {
                     </svg>
                   </button>
                 </div>
+                
+                {/* Recipe Image */}
+                {selectedAIRecipe.image && (
+                  <div className="rounded-xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={selectedAIRecipe.image} 
+                      alt={selectedAIRecipe.title?.en || "AI Recipe"}
+                      className="w-full h-64 object-cover"
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&h=600";
+                      }}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Content */}
