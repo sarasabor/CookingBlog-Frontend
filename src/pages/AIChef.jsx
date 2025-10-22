@@ -103,61 +103,60 @@ function AIChef() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                <span className="text-4xl">🤖</span>
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                <span className="text-3xl">🤖</span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold">AI Chef Assistant</h1>
-                <p className="text-purple-100 mt-1">
-                  {t("aiAssistantDescription") || "Your personal culinary AI companion"}
+                <h1 className="text-2xl font-bold">AI Chef Assistant</h1>
+                <p className="text-purple-100 text-xs">
+                  {t("aiAssistantDescription") || "Votre compagnon culinaire IA"}
                 </p>
               </div>
             </div>
             {chatHistory.length > 0 && (
               <button
                 onClick={clearChat}
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-4 py-2 rounded-lg font-medium transition-all"
+                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-lg font-medium transition-all text-sm"
               >
-                {t("aiClearChat") || "Clear Chat"}
+                {t("aiClearChat") || "Effacer"}
               </button>
             )}
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Chat Area - 2 columns */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-xl h-[calc(100vh-280px)] flex flex-col">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Chat Area - Full Width */}
+        <div className="w-full">
+          <div className="bg-white rounded-2xl shadow-xl h-[calc(100vh-240px)] flex flex-col">
               {/* Chat Messages */}
               <div className="flex-1 overflow-y-auto p-6 space-y-6">
                 {chatHistory.length === 0 ? (
                   // Welcome Screen
-                  <div className="flex flex-col items-center justify-center h-full text-center">
-                    <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full p-8 mb-6">
-                      <span className="text-7xl">👨‍🍳</span>
+                  <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                    <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full p-6 mb-4">
+                      <span className="text-5xl">👨‍🍳</span>
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-800 mb-3">
-                      Welcome to AI Chef!
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                      Bienvenue chez AI Chef!
                     </h2>
-                    <p className="text-gray-600 max-w-md mb-8">
-                      Ask me anything about cooking! I can suggest recipes, explain techniques, recommend ingredients, and much more.
+                    <p className="text-gray-600 max-w-lg mb-6 text-sm">
+                      Posez-moi n'importe quelle question sur la cuisine ! Je peux suggérer des recettes, expliquer des techniques, recommander des ingrédients, et bien plus encore.
                     </p>
                     
                     {/* Example Prompts */}
-                    <div className="w-full max-w-2xl">
-                      <p className="text-sm font-semibold text-gray-500 mb-3">Try asking:</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="w-full max-w-3xl">
+                      <p className="text-xs font-semibold text-gray-500 mb-3">Essayez de demander :</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {examplePrompts.map((prompt, idx) => (
                           <button
                             key={idx}
                             onClick={() => setCurrentPrompt(prompt)}
-                            className="bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 border border-purple-200 rounded-xl p-4 text-left text-sm font-medium text-gray-700 transition-all hover:shadow-md"
+                            className="bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 border border-purple-200 rounded-lg p-3 text-left text-xs font-medium text-gray-700 transition-all hover:shadow-md"
                           >
                             💡 {prompt}
                           </button>
@@ -172,48 +171,47 @@ function AIChef() {
                       key={message.id}
                       className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div className={`max-w-[80%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
+                      <div className={`max-w-4xl w-full ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
                         {/* Message Bubble */}
                         <div
-                          className={`rounded-2xl p-4 ${
+                          className={`rounded-xl p-3 inline-block ${
                             message.type === 'user'
-                              ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white'
+                              ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white ml-auto'
                               : 'bg-gray-100 text-gray-800'
                           }`}
                         >
-                          <p className="leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                         </div>
 
                         {/* AI Recipes */}
                         {message.type === 'ai' && message.recipes && message.recipes.length > 0 && (
-                          <div className="mt-4 space-y-3">
+                          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {message.recipes.map((recipe) => (
                               <motion.div
                                 key={recipe._id}
-                                whileHover={{ scale: 1.02 }}
+                                whileHover={{ scale: 1.03 }}
                                 onClick={() => setSelectedRecipe(recipe)}
-                                className="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer border-2 border-transparent hover:border-purple-300 transition-all"
+                                className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer border border-gray-200 hover:border-purple-400 transition-all"
                               >
-                                <div className="flex">
-                                  <img
-                                    src={recipe.image}
-                                    alt={recipe.title?.en}
-                                    className="w-32 h-32 object-cover"
-                                    onError={(e) => {
-                                      e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400";
-                                    }}
-                                  />
-                                  <div className="flex-1 p-4">
-                                    <h4 className="font-bold text-gray-800 mb-1">
-                                      {recipe.title?.[lang] || recipe.title?.en}
-                                    </h4>
-                                    <p className="text-sm text-gray-600 line-clamp-2 mb-2">
-                                      {recipe.description?.[lang] || recipe.description?.en}
-                                    </p>
-                                    <div className="flex items-center gap-3 text-xs text-gray-500">
-                                      <span>⏱️ {recipe.cookTime} min</span>
-                                      <span>📊 {recipe.difficulty}</span>
-                                    </div>
+                                <img
+                                  src={recipe.image}
+                                  alt={recipe.title?.en}
+                                  className="w-full h-40 object-cover"
+                                  onError={(e) => {
+                                    e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400";
+                                  }}
+                                />
+                                <div className="p-3">
+                                  <h4 className="font-bold text-gray-800 mb-1 text-sm line-clamp-1">
+                                    {recipe.title?.[lang] || recipe.title?.en}
+                                  </h4>
+                                  <p className="text-xs text-gray-600 line-clamp-2 mb-2">
+                                    {recipe.description?.[lang] || recipe.description?.en}
+                                  </p>
+                                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                                    <span>⏱️ {recipe.cookTime}min</span>
+                                    <span>•</span>
+                                    <span className="capitalize">{recipe.difficulty}</span>
                                   </div>
                                 </div>
                               </motion.div>
@@ -222,7 +220,7 @@ function AIChef() {
                         )}
 
                         {/* Timestamp */}
-                        <p className={`text-xs mt-2 ${message.type === 'user' ? 'text-right text-gray-500' : 'text-gray-400'}`}>
+                        <p className={`text-xs mt-1.5 ${message.type === 'user' ? 'text-right text-gray-500' : 'text-gray-400'}`}>
                           {new Date(message.timestamp).toLocaleTimeString()}
                         </p>
                       </div>
@@ -233,14 +231,14 @@ function AIChef() {
                 {/* Loading */}
                 {isLoading && (
                   <div className="flex justify-start">
-                    <div className="bg-gray-100 rounded-2xl p-4">
+                    <div className="bg-gray-100 rounded-xl px-4 py-2">
                       <div className="flex items-center gap-2">
                         <div className="flex gap-1">
-                          <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                          <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                          <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                          <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                          <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                          <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                         </div>
-                        <span className="text-sm text-gray-600">AI Chef is thinking...</span>
+                        <span className="text-xs text-gray-600">Réflexion en cours...</span>
                       </div>
                     </div>
                   </div>
@@ -248,71 +246,24 @@ function AIChef() {
               </div>
 
               {/* Input Area */}
-              <div className="border-t border-gray-200 p-4 bg-gray-50">
-                <div className="flex gap-3">
+              <div className="border-t border-gray-200 p-4 bg-white">
+                <div className="flex gap-2">
                   <input
                     type="text"
                     value={currentPrompt}
                     onChange={(e) => setCurrentPrompt(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder={t("aiPromptPlaceholder") || "Ask me anything about cooking..."}
-                    className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+                    placeholder={t("aiPromptPlaceholder") || "Posez-moi une question sur la cuisine..."}
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-1 focus:ring-purple-300 outline-none transition-all text-sm"
                     disabled={isLoading}
                   />
                   <button
                     onClick={handleSendMessage}
                     disabled={!currentPrompt.trim() || isLoading}
-                    className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="px-5 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm"
                   >
-                    {isLoading ? "..." : "Send"}
+                    {isLoading ? "⏳" : "Envoyer"}
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar - 1 column */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span>💡</span>
-                <span>Tips & Examples</span>
-              </h3>
-              
-              <div className="space-y-4">
-                <div className="bg-purple-50 rounded-xl p-4">
-                  <h4 className="font-semibold text-purple-900 mb-2">Ask for Recipes</h4>
-                  <p className="text-sm text-purple-700">
-                    "I want a spicy Thai curry" or "Quick breakfast ideas"
-                  </p>
-                </div>
-
-                <div className="bg-pink-50 rounded-xl p-4">
-                  <h4 className="font-semibold text-pink-900 mb-2">Get Cooking Tips</h4>
-                  <p className="text-sm text-pink-700">
-                    "How do I make perfect pasta?" or "Best way to cook steak"
-                  </p>
-                </div>
-
-                <div className="bg-orange-50 rounded-xl p-4">
-                  <h4 className="font-semibold text-orange-900 mb-2">Ingredient Ideas</h4>
-                  <p className="text-sm text-orange-700">
-                    "What can I make with chicken and rice?" or "Vegetarian protein sources"
-                  </p>
-                </div>
-
-                <div className="bg-green-50 rounded-xl p-4">
-                  <h4 className="font-semibold text-green-900 mb-2">Dietary Needs</h4>
-                  <p className="text-sm text-green-700">
-                    "Gluten-free dessert recipes" or "Low-carb dinner ideas"
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <span className="text-xl">🌟</span>
-                  <span>Powered by AI • Unlimited possibilities</span>
                 </div>
               </div>
             </div>
