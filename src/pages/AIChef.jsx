@@ -337,80 +337,72 @@ function AIChef() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl shadow-2xl w-[98vw] max-w-[1800px] h-[96vh] overflow-hidden flex flex-col"
             >
-              {/* Hero Image */}
-              {selectedRecipe.image && (
-                <div className="relative h-[40vh] overflow-hidden">
-                  <img 
-                    src={selectedRecipe.image} 
-                    alt={selectedRecipe.title?.en || "AI Recipe"}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1600&h=900";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  
-                  <div className="absolute inset-x-0 top-0 p-6 flex items-start justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-3xl">🤖</span>
-                      <span className="text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-medium shadow-lg backdrop-blur-sm">
-                        AI Generated Recipe
-                      </span>
+              {/* Compact Header with Small Image */}
+              <div className="border-b border-gray-200 bg-gradient-to-br from-purple-50 to-pink-50">
+                <div className="p-6 flex gap-6">
+                  {/* Small Image */}
+                  {selectedRecipe.image && (
+                    <div className="flex-shrink-0">
+                      <img 
+                        src={selectedRecipe.image} 
+                        alt={selectedRecipe.title?.en || "AI Recipe"}
+                        className="w-32 h-32 rounded-xl object-cover shadow-md"
+                        onError={(e) => {
+                          e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400";
+                        }}
+                      />
                     </div>
-                    <button
-                      onClick={() => setSelectedRecipe(null)}
-                      className="text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 transition-all shadow-lg"
-                    >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  <div className="absolute inset-x-0 bottom-0 p-8">
-                    <h2 className="text-4xl font-bold text-white drop-shadow-2xl mb-2">
+                  )}
+                  
+                  {/* Recipe Header */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">🤖</span>
+                        <span className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full font-medium">
+                          AI Generated
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => setSelectedRecipe(null)}
+                        className="text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-full p-2 transition-all"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                    
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2 line-clamp-2">
                       {selectedRecipe.title?.[lang] || selectedRecipe.title?.en || "Recipe"}
                     </h2>
-                    <p className="text-lg text-white/90 drop-shadow-lg">
+                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                       {selectedRecipe.description?.[lang] || selectedRecipe.description?.en}
                     </p>
+                    
+                    {/* Quick Info */}
+                    <div className="flex gap-4 text-sm">
+                      <span className="text-gray-700">⏱️ {selectedRecipe.cookTime} min</span>
+                      <span className="text-gray-700">📊 {selectedRecipe.difficulty}</span>
+                    </div>
                   </div>
                 </div>
-              )}
+              </div>
 
               {/* Scrollable Content */}
               <div className="flex-1 overflow-y-auto">
-                <div className="p-8 space-y-8">
+                <div className="p-6 space-y-6">
                   
-                  {/* Meta Info */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <div className="bg-gray-50 rounded-xl p-4 text-center">
-                      <div className="text-2xl mb-1">⏱️</div>
-                      <div className="text-sm text-gray-600">Cook Time</div>
-                      <div className="text-lg font-semibold text-gray-800">{selectedRecipe.cookTime} min</div>
-                    </div>
-                    <div className="bg-gray-50 rounded-xl p-4 text-center">
-                      <div className="text-2xl mb-1">📊</div>
-                      <div className="text-sm text-gray-600">Difficulty</div>
-                      <div className="text-lg font-semibold text-gray-800 capitalize">{selectedRecipe.difficulty}</div>
-                    </div>
-                    <div className="bg-gray-50 rounded-xl p-4 text-center col-span-2 sm:col-span-1">
-                      <div className="text-2xl mb-1">💪</div>
-                      <div className="text-sm text-gray-600">Nutrition</div>
-                      <div className="text-xs font-medium text-gray-700 mt-1">{selectedRecipe.nutritionHighlights || "Balanced"}</div>
-                    </div>
-                  </div>
-
                   {/* Ingredients */}
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                       <span>🥘</span>
                       <span>Ingredients</span>
                     </h3>
-                    <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+                    <div className="space-y-2">
                       {selectedRecipe.ingredients?.map((ing, idx) => (
-                        <div key={idx} className="flex items-start gap-3 p-2 hover:bg-white rounded-lg transition-colors">
-                          <span className="text-purple-600 mt-1">•</span>
+                        <div key={idx} className="flex items-start gap-2 text-sm">
+                          <span className="text-purple-600 mt-0.5">•</span>
                           <span className="flex-1 text-gray-700">
                             <span className="font-semibold">{ing.quantity} {ing.unit}</span> {ing.name?.[lang] || ing.name?.en || ing.name}
                           </span>
@@ -421,17 +413,17 @@ function AIChef() {
 
                   {/* Instructions */}
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                       <span>👨‍🍳</span>
                       <span>Instructions</span>
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {(selectedRecipe.instructions?.[lang] || selectedRecipe.instructions?.en || []).map((step, idx) => (
-                        <div key={idx} className="flex gap-4">
-                          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        <div key={idx} className="flex gap-3">
+                          <div className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center font-bold text-xs">
                             {idx + 1}
                           </div>
-                          <p className="flex-1 text-gray-700 pt-1">{step}</p>
+                          <p className="flex-1 text-gray-700 text-sm leading-relaxed">{step}</p>
                         </div>
                       ))}
                     </div>
@@ -439,11 +431,10 @@ function AIChef() {
 
                   {/* Tags */}
                   {selectedRecipe.tags && selectedRecipe.tags.length > 0 && (
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-600 mb-2">Tags</h3>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="pt-4 border-t border-gray-200">
+                      <div className="flex flex-wrap gap-1.5">
                         {selectedRecipe.tags.map((tag, idx) => (
-                          <span key={idx} className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
+                          <span key={idx} className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-medium">
                             #{tag}
                           </span>
                         ))}
