@@ -269,7 +269,6 @@ function AIChef() {
             </div>
           </div>
         </div>
-      </div>
 
       {/* Recipe Detail Modal */}
       <AnimatePresence>
