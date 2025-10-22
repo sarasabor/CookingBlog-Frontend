@@ -12,6 +12,7 @@ import Favorites from './pages/Favorites'
 import MoodScience from './pages/MoodScience'
 import MoodSuggestions from './pages/MoodSuggestions'
 import SmartSuggestions from './pages/SmartSuggestions'
+import AIChef from './pages/AIChef'
 import ProtectedRoute from './context/components/ProtectedRoute'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/mood-science" element={<MoodScience />} />
             <Route path="/mood-suggestions" element={<MoodSuggestions />} />
             <Route path="/smart-suggestions" element={<SmartSuggestions />} />
+            <Route path="/ai-chef" element={<AIChef />} />
           </Routes>
         </Layout>
       </Router>
